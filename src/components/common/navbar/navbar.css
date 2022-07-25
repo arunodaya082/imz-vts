@@ -1,0 +1,40 @@
+.header{
+    /* background: linear-gradient(to left top, #9ce6f3, #bceafe, #d9eeff, #eff3ff, #fcfcfc); */
+    background: #fcfcfc;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header_logo{
+    height: 25px;
+    object-fit: contain;
+    margin-left: 20px;
+}
+
+.header_right{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header_notifications{
+    display: flex;
+    object-fit: contain;
+    padding: 6px;
+}
+
+.header_user{
+    display: flex;
+    object-fit: contain;
+    padding: 6px;
+}
+
+.header_icon{
+    margin-right: 12px;
+
+}

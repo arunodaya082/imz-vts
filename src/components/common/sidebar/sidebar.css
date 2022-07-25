@@ -1,0 +1,15 @@
+.sidebar {
+   flex: 0.2;
+  }
+
+.navlink{
+  display: flex;
+  padding: 10px;
+}
+
+.sidebar_icon{
+  margin-top: 8px;
+  margin-right: 10px;
+  padding-left: 8px;
+}
+
