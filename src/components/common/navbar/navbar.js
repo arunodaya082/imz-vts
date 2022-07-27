@@ -1,16 +1,22 @@
-import React from 'react';
+import {React} from 'react';
 import "./navbar.css";
 import MenuIcon from '@material-ui/icons/Menu';
 import logo1 from "../../../assests/logo1.png";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import Avatar from "@material-ui/core/Avatar";
 import { Typography } from '@material-ui/core';
+import { SidebarContext } from '../sidebar/sidebarContext';
+import { useContext } from 'react';
 
 const Header = () => {
+
+  const {isOpen,sidebarToggle} = useContext(SidebarContext);
+
+
   return (
     <div className="header">
       <div className='header_left'>
-          <MenuIcon/>
+          <MenuIcon   isOpen={isOpen} onClick={sidebarToggle}/>
           <img className='header_logo' src={logo1} alt="logo"/>
       </div>
 
