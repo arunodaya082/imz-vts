@@ -1,7 +1,13 @@
 .dashboard_home{
     /* border: 1px solid black; */
+    display: flex;
     flex: 0.9;
-    margin-top: 50px;
-    
-   
+    margin-top: 25px; 
+}
+
+.dashboard-head1{
+    border: 1px solid black;
+    border-radius: 6px;
+    padding: 6px;
+
 }

@@ -30,19 +30,16 @@ const App = () => {
       <Router>
 
       <SidebarContext.Provider value={{isOpen: sidebarOpen, sidebarToggle: handleSidebar}}>
-
-     
-
       <Header  />
       <div className='homepage'>
       
       <Sidebar  />
         <Routes>
-          <Route path='dashboard' element={<Dashboard />} /> 
+          <Route  path='/' element={<Dashboard />} />
           <Route path='live' element={<Vehiclelive/>} /> 
           <Route path='maps' element={<Map/>}/>
           <Route path='inventory' element={<Inventory/>} /> 
-          <Route path='misreport' element={<Misreports/>} />
+          <Route path='mis' element={<Misreports/>} />
           <Route path='emergency' element={<EmergencyReport/>} /> 
         </Routes>
         

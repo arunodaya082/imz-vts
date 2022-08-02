@@ -1,5 +1,4 @@
-.sidebar {
-  
+.sidebar { 
   background-image: linear-gradient(to bottom, #f5f6f8, #c5d0dc, #92acbe, #5a8b9f, #0a6b7d);
   position: fixed;
   top:50;
@@ -10,6 +9,7 @@
   overflow-x: hidden;
   font-size: 16px;
   transition: all 0.15s;
+  border-right: 1px solid #92acbe ;
 }
 
 .navlink{
@@ -23,15 +23,35 @@
   padding-left: 8px;
 }
 
-.sidebar_title{
-flex:1;
-margin-left: 16px;
-font-size: 12px;
-font-weight: 500;
+.sidesubmenu_icon{
+  margin-top: 8px;
+  margin-right: 2px;
+  padding-left: 16px;
 }
+
+.sidebar_title{
+  flex:1;
+  margin-left: 16px;
+  font-size: 13px;
+  font-weight: 500;
+  margin-top: 12px;
+}
+
+.sidebarsubmenu_title{
+  flex:1;
+margin-left: 12px;
+font-size: 13px;
+font-weight: 500;
+margin-top: 8px;
+}
+
 
 .navlink:hover{
  background: lightgray;
+}
+
+.navlink:active {
+  background: lightgray;
 }
 
 
@@ -41,6 +61,23 @@ font-weight: 500;
   align-items: center;
 }
 
+
 .showDivReport{
-display:table-column;
+display: none;
+}
+
+.showDivReport:hover{
+  display: block;
+  /* height: 150px;
+  overflow: auto; */
+  padding-bottom: 1rem;
+
+}
+
+
+.dropdown:hover +.showDivReport{
+  display: block;
+  /* height: 150px;
+  overflow: auto; */
+
 }

@@ -39,3 +39,18 @@
 .header_icon{
     margin-right: 12px;
 }
+
+
+.sideicon{
+    font-size: 20px;
+}
+
+.sideopen{
+    transform:rotate(180deg);
+    transition: all 0.1s;
+}
+
+.sideclose{
+    transform:rotate(0deg);
+    transition: all 0.1s;
+}

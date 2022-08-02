@@ -1,6 +1,7 @@
 import {React} from 'react';
 import "./navbar.css";
-import MenuIcon from '@material-ui/icons/Menu';
+import {TbLayoutSidebarRightCollapse} from 'react-icons/tb';
+import {TbLayoutSidebarRightExpand} from 'react-icons/tb';
 import logo1 from "../../../assests/logo1.png";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import Avatar from "@material-ui/core/Avatar";
@@ -16,7 +17,7 @@ const Header = () => {
   return (
     <div className="header">
       <div className='header_left'>
-          <MenuIcon   isOpen={isOpen} onClick={sidebarToggle}/>
+          {isOpen ? <TbLayoutSidebarRightExpand className='sideclose' isOpen={isOpen} onClick={sidebarToggle} size={28}/> : <TbLayoutSidebarRightExpand className='sideopen' onClick={sidebarToggle} size={28}/>}
           <img className='header_logo' src={logo1} alt="logo"/>
       </div>
 
