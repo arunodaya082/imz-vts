@@ -1,19 +1,17 @@
-import React from 'react';
-import { Container, Paper, Typography, Grid, TextField, Button } from '@material-ui/core';
+import React from "react";
+import { Container, Paper } from '@material-ui/core';
+import GoogleMapReact from 'google-map-react';
+import Pageheader from '../common/PageHeader/pageheader2';
 import { SidebarContext } from '../common/sidebar/sidebarContext';
 import { useContext } from 'react';
 import { makeStyles } from '@material-ui/core';
-import Pageheader from '../common/PageHeader/pageheader2';
 
+const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    width: '100%',
-    marginTop: '7rem'
-  },
+
   paper: {
     marginBottom: theme.spacing(1),
-
   },
   table: {
     minWidth: 750,
@@ -36,52 +34,53 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+const topViewData = { 'title': 'Home ', 'subTitleFirst': '/ Map ', 'subTitleSecond': '', 'subTitleThird': '', 'buttonIcon': true, "buttonText": ' Add User', 'ButtonClick': "", 'backPath': '/dashboard', 'backPathSecond': '/maps', 'addButtonPath': '/adduser', 'addButton': false, 'addCancelClick': '', 'addClick': '', 'editButton': false, 'editButtonClick': '', 'updatePermission': [], 'updateButton': false, 'goBackEditClick': '', 'updateClick': '', 'addButtonPermission': "" }
+  
 
-export const data = [
-  ["Task", "Hours per Day"],
-  ["Work", 11],
-  ["Eat", 2],
-  ["Commute", 2],
-  ["Watch TV", 2],
-  ["Sleep", 7],
-];
+export default function SimpleMap(){
 
-export const options = {
-  title: "My Daily Activities",
-};
-
-function Map() {
   const classes = useStyles();
   const { isOpen } = useContext(SidebarContext);
+  const defaultProps = {
+    center: {
+      lat: 28.495761,
+      lng: 77.079330
+    },
+    zoom: 11
+  };
 
- 
-
-  const topViewData = { 'title': 'Home ', 'subTitleFirst': '/ Map ', 'subTitleSecond': '', 'subTitleThird': '', 'buttonIcon': true, "buttonText": ' Add User', 'ButtonClick': "", 'backPath': '/dashboard', 'backPathSecond': '/maps', 'addButtonPath': '/adduser', 'addButton': false, 'addCancelClick': '', 'addClick': '', 'editButton': false, 'editButtonClick': '', 'updatePermission': [], 'updateButton': false, 'goBackEditClick': '', 'updateClick': '', 'addButtonPermission': "" }
   return (
-    <div className='dashboard_home' style={{ marginLeft: isOpen ? "201px" : "14px" }} >
-      <Container style={{ paddingRight: isOpen ? '5px' : "13px" }} >
+    // Important! Always set the container height explicitly
+    <div className='dashboard_home' xs={12} md={12} lg={12} style={{ marginLeft: isOpen ? "201px" : "14px" }} >
+    <Container style={{ paddingRight: isOpen ? '5px' : "13px" }} >
 
 
-        {/* top page header  */}
-        <div style={{ marginLeft: isOpen ? "24px" : "12px" }}>
+    <div style={{ marginLeft: isOpen ? "24px" : "12px" }}>
           <Pageheader data={topViewData} />
         </div>
+      {/* top page header  */}
 
 
-        {/* dashboard search section  */}
+      <Paper className={classes.paper} id='left' style={{ width: isOpen ? '106%' : '112%', padding: '0.5rem', marginLeft: isOpen ? "25px" : "10px" }}>
 
-      
 
-        {/* gps health dashboard data view */}
+    <div style={{ height: '100vh', width: '100%' }}>
 
-        <Paper className={classes.paper} id='left' style={{ width: isOpen ? '106%' : '112%', padding: '0.5rem', marginLeft: isOpen ? "25px" : "10px" }}>
-
-          <h1>Under Development... </h1>
-          
-        </Paper>
-      </Container>
+      <GoogleMapReact
+        bootstrapURLKeys={{ key: "AIzaSyAxu4AIfJS8BOI8H3LYIOB40YWIaE3UdX0" }}
+        defaultCenter={defaultProps.center}
+        defaultZoom={defaultProps.zoom}
+      >
+        <AnyReactComponent
+          lat= {28.495761}
+          lng= {77.079330}
+          text="My Marker"
+        />
+      </GoogleMapReact>
     </div>
-  )
-}
 
-export default Map;
+    </Paper>
+    </Container>
+    </div>
+  );
+}

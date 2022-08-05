@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Container, Paper, Typography, Grid, Button, TextField } from '@material-ui/core';
 import { SidebarContext } from '../common/sidebar/sidebarContext';
-import { Autocomplete } from '@material-ui/lab';
 import { useContext } from 'react';
 import { makeStyles } from '@material-ui/core';
 import Pageheader from '../common/PageHeader/pageheader2';
@@ -11,7 +10,8 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import LockTable from "../common/tablelist";
-
+import { useEffect } from 'react';
+import { TrackingAction } from '../../actions/tracking';
 
 const useStyles = makeStyles((theme) => ({
 
@@ -41,52 +41,59 @@ const useStyles = makeStyles((theme) => ({
 
 
 const columns = [
-  { id: 'name', label: 'Name', minWidth: 170 },
-  { id: 'code', label: 'ISO\u00a0Code', minWidth: 100 },
+  { id: 'srno', label: 'Sr. No.', minWidth: 50,align: 'center' },
+  { id: 'date', label: 'Date', minWidth: 100,align: 'center' },
   {
-    id: 'population',
-    label: 'Population',
-    minWidth: 170,
-    align: 'right',
+    id: 'deviceId',
+    label: 'Device ID',
+    minWidth: 100,
+    align: 'center',
     format: (value) => value.toLocaleString('en-US'),
   },
   {
-    id: 'size',
-    label: 'Size\u00a0(km\u00b2)',
-    minWidth: 170,
-    align: 'right',
+    id: 'vehcileNo',
+    label: 'Vehicle No.',
+    minWidth: 100,
+    align: 'center',
     format: (value) => value.toLocaleString('en-US'),
   },
   {
-    id: 'density',
-    label: 'Density',
+    id: 'imei',
+    label: 'IMEI',
+    minWidth: 100,
+    align: 'center',
+    
+  },
+  {
+    id: 'tracking',
+    label: 'Tracking Data',
     minWidth: 170,
-    align: 'right',
+    align: 'center',
     format: (value) => value.toFixed(2),
   },
 ];
 
-function createData(name, code, population, size) {
-  const density = population / size;
-  return { name, code, population, size, density };
+function createData(srno,date,deviceId,vehcileNo,imei,tracking) {
+  
+  return { srno,date,deviceId, vehcileNo, imei, tracking };
 }
 
 const rows = [
-  createData('India', 'IN', 1324171354, 3287263),
-  createData('China', 'CN', 1403500365, 9596961),
-  createData('Italy', 'IT', 60483973, 301340),
-  createData('United States', 'US', 327167434, 9833520),
-  createData('Canada', 'CA', 37602103, 9984670),
-  createData('Australia', 'AU', 25475400, 7692024),
-  createData('Germany', 'DE', 83019200, 357578),
-  createData('Ireland', 'IE', 4857000, 70273),
-  createData('Mexico', 'MX', 126577691, 1972550),
-  createData('Japan', 'JP', 126317000, 377973),
-  createData('France', 'FR', 67022000, 640679),
-  createData('United Kingdom', 'GB', 67545757, 242495),
-  createData('Russia', 'RU', 146793744, 17098246),
-  createData('Nigeria', 'NG', 200962417, 923768),
-  createData('Brazil', 'BR', 210147125, 8515767),
+  createData('1','03/08/2022','India', 'IN', 1324171354, 3287263),
+  createData('2','03/08/2022','China', 'CN', 1403500365, 9596961),
+  createData('3','03/08/2022','Italy', 'IT', 60483973, 301340),
+  createData('4','03/08/2022','United States', 'US', 327167434, 9833520),
+  createData('5','03/08/2022','Canada', 'CA', 37602103, 9984670),
+  createData('6','03/08/2022','Australia', 'AU', 25475400, 7692024),
+  createData('7','03/08/2022','Germany', 'DE', 83019200, 357578),
+  createData('8','03/08/2022','Ireland', 'IE', 4857000, 70273),
+  createData('9','03/08/2022','Mexico', 'MX', 126577691, 1972550),
+  createData('10','03/08/2022','Japan', 'JP', 126317000, 377973),
+  createData('11','03/08/2022','France', 'FR', 67022000, 640679),
+  createData('12','03/08/2022','United Kingdom', 'GB', 67545757, 242495),
+  createData('13','03/08/2022','Russia', 'RU', 146793744, 17098246),
+  createData('14','03/08/2022','Nigeria', 'NG', 200962417, 923768),
+  createData('15','03/08/2022','Brazil', 'BR', 210147125, 8515767),
 ];
 
 
@@ -106,32 +113,74 @@ export const options = {
 function Vehiclelive() {
   const classes = useStyles();
   const { isOpen } = useContext(SidebarContext);
+
+  const [deviceList,setDeviceList] = useState([]);
+  const [selectType, setSelectType] = useState(" ");
+  const [typeValue, setTypeValue] = useState("");
   const [fromDate, setFromDate] = useState("");
   const [toDate, setToDate] = useState("");
 
-  const [typeValue, setTypeValue] = useState("");
 
-  const [typeMenu,setTypeMenu] = useState([
-    {id:0,name:"Device ID"},
-    {id:0,name:"Vehicle No."},
-    {id:0,name:"IMEI No."},
-  ])
-
-
-
-
-  const [selectTypeMenu, setSelectTypeMenu] = useState();
-
-
+  
 
   const handleChange = (e) => {
-    setSelectTypeMenu(e.target.value);
+    setSelectType(e.target.value);
   }
 
-
   const topViewData = { 'title': 'Home ', 'subTitleFirst': '/ Vehicle-live-Status ', 'subTitleSecond': '', 'subTitleThird': '', 'buttonIcon': true, "buttonText": ' Add User', 'ButtonClick': "", 'backPath': '/dashboard', 'backPathSecond': '/maps', 'addButtonPath': '/adduser', 'addButton': false, 'addCancelClick': '', 'addClick': '', 'editButton': false, 'editButtonClick': '', 'updatePermission': [], 'updateButton': false, 'goBackEditClick': '', 'updateClick': '', 'addButtonPermission': "" }
+  
+  useEffect(()=>{
+    search();
+  },[]);
+
+
+
+  const search=()=>{
+    fetchTracking();
+  }
+
+  const fetchTracking=()=>{
+    // if(selectType.trim() == ""  ){
+    //   alert("please enter type")
+    //   return false;
+    // }
+
+    // if(typeValue.trim() == ""){
+    //   alert("please enter value")
+    //   return false;
+    // }
+
+    // if(fromDate === ""){
+    //   alert("please select from date")
+    //   return false;
+    // }
+
+    // if(toDate === ""){
+    //   alert("please select to date")
+    //   return false;
+    // }
+
+    // TrackingAction.fetchTracking(
+    //   {
+    //   deviceType: selectType,
+    //   value: typeValue,
+    //   fromDate: fromDate,
+    //   toDate: toDate,
+    // }
+    // )
+    // .then((response) => {
+    //   if (response != null) {
+    //       setDeviceList(response)
+    //   }
+    //   else {
+    //     setDeviceList([])
+    //   }
+    // });
+    console.log(selectType,typeValue,fromDate,toDate)
+  }
+
   return (
-    <div className='dashboard_home' style={{ marginLeft: isOpen ? "201px" : "14px" }} >
+    <div className='dashboard_home' xs={12} md={12} lg={12} style={{ marginLeft: isOpen ? "201px" : "14px" }} >
       <Container style={{ paddingRight: isOpen ? '5px' : "13px" }} >
 
 
@@ -166,12 +215,12 @@ function Vehiclelive() {
                   aria-labelledby="demo-row-radio-buttons-group-label"
                   name="row-radio-buttons-group"
                   type="radio"
-                  value={selectTypeMenu}
+                  value={selectType}
                   onChange={handleChange}
                 >
-                  <FormControlLabel value="device" defaultChecked control={<Radio />} label="Device ID" />
-                  <FormControlLabel value="vehicle" control={<Radio />} label="Vehicle No." />
-                  <FormControlLabel value="imei" control={<Radio />} label="IMEI No." />
+                  <FormControlLabel value="0" defaultChecked control={<Radio />} label="Device ID" />
+                  <FormControlLabel value="1" control={<Radio />} label="Vehicle No." />
+                  <FormControlLabel value="2" control={<Radio />} label="IMEI No." />
                 </RadioGroup>
               </FormControl>
 
@@ -213,7 +262,7 @@ function Vehiclelive() {
             {/* form filling for tracking */}
 
               <Grid xs={2}>
-              <Typography style={{ marginTop: "16px", fontSize: "18px", fontWeight: "bold"}}>
+              <Typography style={{ marginTop: "16px", fontSize: "12px", fontWeight: "bold"}}>
                 Enter  Value
               </Typography>  
 
@@ -224,7 +273,6 @@ function Vehiclelive() {
                   variant="outlined"
                   size='small'
                   style={{marginTop:"2px",background:'#fff'}}
-                  
                   value={typeValue}
                   // InputLabelProps={{ shrink: true }}
                   onChange={(e) => { setTypeValue(e.target.value) }}
@@ -234,7 +282,7 @@ function Vehiclelive() {
            
 
               <Grid xs={2} style={{paddingLeft:"20px",marginTop:"6px"}}>
-              <Typography style={{marginTop:"12px",fontSize: "18px", fontWeight: "bold"}}>
+              <Typography style={{marginTop:"12px",fontSize: "12px", fontWeight: "bold"}}>
                 Select From Date
               </Typography>  
 
@@ -244,16 +292,13 @@ function Vehiclelive() {
                   variant="outlined"
                   size='small'
                   style={{marginLeft:"2px"}}
-                  disabled={!selectTypeMenu && false}
                   value={fromDate}
                   onChange={(e) => {setFromDate(e.target.value) }}
                 />
-
-
               </Grid>
 
               <Grid xs={2} style={{marginTop:"6px"}}>
-              <Typography style={{marginTop:"12px",fontSize: "18px", fontWeight: "bold"}}>
+              <Typography style={{marginTop:"12px",fontSize: "12px", fontWeight: "bold"}}>
                 Select To Date
               </Typography>  
 
@@ -272,22 +317,21 @@ function Vehiclelive() {
           <Grid xs={12} style={{ marginTop: "22px", fontSize: "18px", fontWeight: "bold" }}>
             <Button type="button"
               variant="contained"
-              // onClick={onSubmit}
+              onClick={search}
               // disabled={isLoading}
               color="primary"
+
               >
               Search
             </Button>
           </Grid>
           </Grid>
-      
-
-
-      </Paper>
+ 
+       </Paper>
 
 
           {/* list table  */}
-          <Paper style={{margin:"20px",backgroundColor:"#fff"}}>
+          
           <Grid container xs={12} style={{padding:"20px"}}>
           
             <Typography style={{fontWeight:"bold",margin:"6px"}}>
@@ -298,7 +342,7 @@ function Vehiclelive() {
 
           
           </Grid>
-            </Paper>
+            
 
         </Paper>
       </Container>

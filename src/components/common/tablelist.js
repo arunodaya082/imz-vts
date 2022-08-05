@@ -8,8 +8,6 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 
-
-
 export default function LockTable({columns,rows}) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -28,20 +26,12 @@ export default function LockTable({columns,rows}) {
       <TableContainer >
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
-            {/* <TableRow>
-              <TableCell align="center" colSpan={2}>
-                Country
-              </TableCell>
-              <TableCell align="center" colSpan={3}>
-                Details
-              </TableCell>
-            </TableRow> */}
             <TableRow>
               {columns.map((column) => (
                 <TableCell
                   key={column.id}
                   align={column.align}
-                  style={{minWidth: column.minWidth }}
+                  style={{minWidth: column.minWidth,background:"rgba(0,0,0,0.2)" }}
                 >
                   {column.label}
                 </TableCell>
@@ -53,11 +43,12 @@ export default function LockTable({columns,rows}) {
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row) => {
                 return (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+                  <TableRow hover role="checkbox" tabIndex={-1} key={row.code} style={{padding:"8px"}}>
                     {columns.map((column) => {
                       const value = row[column.id];
                       return (
-                        <TableCell key={column.id} align={column.align}>
+                        <TableCell key={column.id} align={column.align}
+                        style={{padding:"24px"}} >
                           {column.format && typeof value === 'number'
                             ? column.format(value)
                             : value}

@@ -2,18 +2,21 @@ import React, { useState } from 'react';
 import "./App.css";
 import Header from './components/common/navbar/navbar';
 import Sidebar from './components/common/sidebar/sidebar';
+import TripDashboard from './components/dashboard/TripDashboard';
 import Dashboard from './components/dashboard/Dashboard';
 import { BrowserRouter as Router, Routes,Route} from 'react-router-dom';
 import Vehiclelive from './components/Vehicle_live_Status/vehicle_live';
 import Inventory from './components/Inventory_Management/inventory_manageement';
-import Misreports from './components/Mis_Reports/misreports';
-import Map from './components/Maps/map';
+import Reports from './components/Mis_Reports/Reports';
+import SimpleMap from './components/Maps/map';
 import EmergencyReport from './components/Mis_Reports/emergencyReport';
 import { SidebarContext } from './components/common/sidebar/sidebarContext';
 
 
-const App = () => {
 
+
+const App = () => {
+ 
   const [sidebarOpen, setSidebarOpen] = useState(true);
 
 
@@ -25,28 +28,30 @@ const App = () => {
   return (
 
 
-    <div  className='App'>
+    <div>
 
       <Router>
-
+     
+     
       <SidebarContext.Provider value={{isOpen: sidebarOpen, sidebarToggle: handleSidebar}}>
       <Header  />
       <div className='homepage'>
       
       <Sidebar  />
         <Routes>
-          <Route  path='/' element={<Dashboard />} />
-          <Route path='live' element={<Vehiclelive/>} /> 
-          <Route path='maps' element={<Map/>}/>
+          <Route  path="/" element={<Dashboard />} />
+          {/* <Route  path="/" element={<GpsHealthDashboard />} /> */}
+          <Route  path='/tripdashboard' element={<TripDashboard />} /> 
+          <Route path='live' element={<Vehiclelive/>} />
+          <Route path='maps' element={<SimpleMap/>}/>
           <Route path='inventory' element={<Inventory/>} /> 
-          <Route path='mis' element={<Misreports/>} />
-          <Route path='emergency' element={<EmergencyReport/>} /> 
+          <Route path='reports' element={<Reports/>}/>
         </Routes>
         
 
       </div>
       </SidebarContext.Provider>
-      
+     
       </Router>
     </div>
   )

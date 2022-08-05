@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import "./sidebar.css";
+import useWindowDimensions from "../custom_hooks/useDimensions";
 import { useNavigate } from "react-router-dom";
 import { Dashboard } from '@material-ui/icons';
 import StoreIcon from '@material-ui/icons/Store';
@@ -13,6 +14,9 @@ import { useContext } from 'react';
 import {TbReportAnalytics} from "react-icons/tb";
 
 const Sidebar = () => {
+
+  const { height, width } = useWindowDimensions();
+
 
 
   const { isOpen } = useContext(SidebarContext);
@@ -31,6 +35,7 @@ const Sidebar = () => {
   }
 
   return (
+    
     <div className='sidebar' style={{ width: isOpen ? "220px" : "60px", flex: isOpen ? 0.1 : 0.3 }}>
       <div className='top-menu'>
         <div className='navlink active' onClick={() => handleClick('/')}>
@@ -38,6 +43,14 @@ const Sidebar = () => {
             <Dashboard />
           </div>
           {isOpen ? <div className='sidebar_title text-white ml-2 font-weight-bolder' >Dashboard </div> : ""}
+        </div>
+        <Divider />
+
+        <div className='navlink active' onClick={() => handleClick('tripdashboard')}>
+          <div className='sidebar_icon' style={{ width: '20px' }}>
+            <Dashboard />
+          </div>
+          {isOpen ? <div className='sidebar_title text-white ml-2 font-weight-bolder' >Trip Dashboard </div> : ""}
         </div>
         <Divider />
 
@@ -99,7 +112,7 @@ const Sidebar = () => {
           </div>
           <Divider />
 
-          <div className='text-white p-2 pl-4 navlink' onClick={() => handleClick('Movement')}>
+          <div className='text-white p-2 pl-4 navlink' onClick={() => handleClick('reports?type=movement')}>
             <div className='sidesubmenu_icon' style={{width:'20px'}}>  
              {/* <img style={{ opacity: window.location.search.split("?")[1] == 'type=running' ? 1 : 0.5 }} src={RunningIcon} alt='route' /> */}
              <TbReportAnalytics/>

@@ -8,7 +8,7 @@
   left: 0;
   overflow-x: hidden;
   font-size: 16px;
-  transition: all 0.15s;
+  transition: all 0.1s;
   border-right: 1px solid #92acbe ;
 }
 
@@ -30,7 +30,7 @@
 }
 
 .sidebar_title{
-  flex:1;
+  /* flex:1; */
   margin-left: 16px;
   font-size: 13px;
   font-weight: 500;
@@ -70,7 +70,7 @@ display: none;
   display: block;
   /* height: 150px;
   overflow: auto; */
-  padding-bottom: 1rem;
+  padding-bottom: 1px;
 
 }
 

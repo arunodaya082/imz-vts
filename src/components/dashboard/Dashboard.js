@@ -7,9 +7,8 @@ import { SidebarContext } from '../common/sidebar/sidebarContext';
 import { useContext } from 'react';
 import { makeStyles } from '@material-ui/core';
 import Pageheader from '../common/PageHeader/pageheader2';
-import { PieChart } from 'react-minimal-pie-chart';
-import { Chart } from "react-google-charts";
-import {FiTruck} from "react-icons/fi";
+import PieChart from "../common/piechart2";
+import DChart from "../common/piechart";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -42,18 +41,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export const data = [
-  ["Task", "Hours per Day"],
-  ["Work", 11],
-  ["Eat", 2],
-  ["Commute", 2],
-  ["Watch TV", 2],
-  ["Sleep", 7],
-];
-
-export const options = {
-  title: "My Daily Activities",
-};
 
 function Dashboard() {
   const classes = useStyles();
@@ -82,7 +69,38 @@ function Dashboard() {
   const [hubValue, setHubValue] = useState("");
 
 
-  const topViewData = { 'title': 'Home ', 'subTitleFirst': '/ Dashboard ', 'subTitleSecond': '/ Gps dashboard', 'subTitleThird': '', 'buttonIcon': true, "buttonText": ' Add User', 'ButtonClick': "", 'backPath': '/dashboard', 'backPathSecond': '/maps', 'addButtonPath': '/adduser', 'addButton': false, 'addCancelClick': '', 'addClick': '', 'editButton': false, 'editButtonClick': '', 'updatePermission': [], 'updateButton': false, 'goBackEditClick': '', 'updateClick': '', 'addButtonPermission': "" }
+  const header = [
+    { id: 0, label: "Total Transporters", value: 105, color: "#52be2b", background: "#dbf5d2" },
+    { id: 1, label: "Total Registered Vehicles", value: 220, color: "", background: "" },
+    { id: 2, label: "Total GPS Devices Installed", value: 200, color: "", background: "" },
+    { id: 3, label: "Total Active Devices", value: 150, color: "", background: "" },
+  ]
+
+  const header2 = [
+    { id: 0, label: "Vehicles In Network", color: "", value: 150, background: "" },
+    { id: 1, label: "Vehicles Out of Network", color: "", value: 32, background: "" },
+    { id: 2, label: "Non Active Devices", color: "", value: 25, background: "" },
+    { id: 3, label: "Vehicles Under Maintenance", color: "", value: 15, background: "" },
+  ]
+
+  const alerts = [
+    { id: 0, label: "Route Deviation", color: "", value: 12, background: "" },
+    { id: 1, label: "OverSpeeding", color: "", value: 15, background: "" },
+    { id: 2, label: "Unauthorised Stoppage", color: "", value: 35, background: "" },
+    { id: 3, label: "Tampering", color: "", value: 5, background: "" }
+
+  ]
+
+  const tripsummary = [
+    { id: 0, label: "Total Trips Today", color: "", value: 169, background: "" },
+    { id: 1, label: "Vehicles On Trip", color: "", value: 92, background: "" },
+    { id: 2, label: "Completed Trips", color: "", value: 110, background: "" },
+    { id: 3, label: "Delayed Trios", color: "", value: 46, background: "" },
+  ]
+
+
+
+  const topViewData = { 'title': 'Home ', 'subTitleFirst': '/ Dashboard ', 'subTitleSecond': '', 'subTitleThird': '', 'buttonIcon': true, "buttonText": ' Add User', 'ButtonClick': "", 'backPath': '/dashboard', 'backPathSecond': '/maps', 'addButtonPath': '/adduser', 'addButton': false, 'addCancelClick': '', 'addClick': '', 'editButton': false, 'editButtonClick': '', 'updatePermission': [], 'updateButton': false, 'goBackEditClick': '', 'updateClick': '', 'addButtonPermission': "" }
   return (
     <div className='dashboard_home' style={{ marginLeft: isOpen ? "201px" : "14px" }} >
       <Container style={{ paddingRight: isOpen ? '5px' : "13px" }} >
@@ -112,7 +130,7 @@ function Dashboard() {
             {/* search with options  */}
             <Grid container xs={5} style={{ alignItems: "flex-end" }}>
               <Grid xs={5}>
-                <Typography style={{ marginTop: "16px", fontSize: "18px", fontWeight: "bold",   }}>
+                <Typography style={{ marginTop: "16px", fontSize: "18px", fontWeight: "bold", }}>
                   <Autocomplete id='header'
                     getOptionLabel={(region) => region.name}
 
@@ -138,7 +156,7 @@ function Dashboard() {
 
               <Grid xs={5}>
 
-                <Typography style={{ marginTop: "16px", fontSize: "18px", fontWeight: "bold",   }}>
+                <Typography style={{ marginTop: "16px", fontSize: "18px", fontWeight: "bold", }}>
                   <Autocomplete id='header'
                     getOptionLabel={(hub) => hub.name}
 
@@ -163,10 +181,10 @@ function Dashboard() {
 
               <Grid item xs={2} >
 
-                <Typography gutterBottom variant="subtitle1" style={{ marginTop: "24px", fontSize: "18px", fontWeight: "bold",   }}>
-                    <Button variant="contained" style={{ padding: '6px' }} >
-                      Search
-                    </Button>
+                <Typography gutterBottom variant="subtitle1" style={{ marginTop: "24px", fontSize: "18px", fontWeight: "bold", }}>
+                  <Button variant="contained" style={{ padding: '6px' }} >
+                    Search
+                  </Button>
                 </Typography>
 
               </Grid>
@@ -175,6 +193,43 @@ function Dashboard() {
 
           </Grid>
         }
+
+
+<Paper className={classes.paper} id='left' style={{ width: isOpen ? '106%' : '112%', padding: '0.5rem', marginLeft: isOpen ? "25px" : "10px" }}>
+
+<Typography>
+  Alerts:
+</Typography>
+<Grid container xs={12}>
+
+
+
+  <Grid xs={3}>
+    <Typography> 
+      Route-Deviation : 03
+    </Typography>
+  </Grid>
+
+  <Grid xs={3}>
+    <Typography>
+      Over-Speeding : 08
+    </Typography>
+  </Grid>
+
+  <Grid xs={3}>
+    <Typography>
+      Unauthorised Stoppage : 13
+    </Typography>
+  </Grid>
+
+  <Grid xs={3}>
+    <Typography>
+      Tampering : 02
+    </Typography>
+  </Grid>
+</Grid>
+
+</Paper>
 
 
         {/* gps health dashboard data view */}
@@ -188,150 +243,88 @@ function Dashboard() {
             </Typography>
           </Grid>
 
-           
-
-              <Grid container xs={12} style={{display:"inline-flex",marginTop:"6px"}}>
 
 
-                <Grid xs={4}>
-                    
-                    <Typography variant='outlined' style={{border:"1px solid black"}}>
-                          <FiTruck/>
-                          Total Transporters
+          <Grid container xs={12} style={{ display: "inline-flex", marginTop: "6px" }}>
+            <Grid xs={1}>
+
+            </Grid>
+
+            <Grid xs={3} style={{ paddingLeft: "20px" }}>
+              <Typography style={{ marginTop: "6px", marginLeft: "108px", fontSize: "12px", fontWeight: "bold" }}>
+                GPS Health Pie Chart
+              </Typography>
+              <DChart />
+            </Grid>
+
+            <Grid xs={1}>
+            </Grid>
+            <Grid xs={5} style={{ padding: "20px", marginLeft: "30px", marginTop: "45px" }}>
+              {
+                header.map((head, index) => (
+                  <Grid xs={5} style={{ background: "#f4f4f4", padding: "8px", marginBottom: "16px", border: "1px solid black", borderRadius: "6px" }}>
+
+                    <Typography style={{ fontWeight: "bold", borderRadius: "4px", color: "#00" }}>
+
+                      {head.label}
                     </Typography>
-                </Grid>
-
-                <Grid xs={4}>
-
-                </Grid>
-                <Grid xs={4}>
-
-                </Grid>
-                <Grid xs={4}>
-
-                </Grid>
-
-              </Grid>
-
-           
-
-          {/* gps health part 2 */}
-
-          {/* <Grid container direction='row' xs={12}>
-
-            <Grid xs={3} >
-
-              <Chart
-                chartType="PieChart"
-                data={data}
-                options={options}
-                width={"100%"}
-                height={"400px"}
-              />
-
-            </Grid>
-
-            <Grid container xs={9}>
-
-              <Grid xs={3}>
-                <Typography>
-                  Vehicles in Network
-                </Typography>
-              </Grid>
-
-              <Grid xs={3}>
-                <Typography>
-                  Vehicles Out Of Network :
-                </Typography>
-              </Grid>
-
-              <Grid xs={3}>
-                <Typography>
-                  Non Active Devices :
-                </Typography>
-              </Grid>
-
-              <Grid xs={3}>
-                <Typography>
-                  Vehicles under Maintenance :
-                </Typography>
-              </Grid>
-            </Grid>
-
-          </Grid> */}
-          {/* gps health alert part */}
-
-          <Typography>
-            Alerts:
-          </Typography>
-          <Grid container xs={12}>
-
-
-
-            <Grid xs={3}>
-              <Typography>
-                Route-Deviation
-              </Typography>
-            </Grid>
-
-            <Grid xs={3}>
-              <Typography>
-                Over-Speeding :
-              </Typography>
-            </Grid>
-
-            <Grid xs={3}>
-              <Typography>
-                Unauthorised Stoppage :
-              </Typography>
-            </Grid>
-
-            <Grid xs={3}>
-              <Typography>
-                Tampering :
-              </Typography>
+                  </Grid>
+                ))
+              }
             </Grid>
           </Grid>
 
-        </Paper>
+          </Paper>
 
-        {/* Trip Summary Dashboard */}
+
+
+          {/* Gps Vehicle Status */}
 
         <Paper className={classes.paper} id='left' style={{ width: isOpen ? '106%' : '112%', padding: '0.5rem', marginLeft: isOpen ? "25px" : "10px" }}>
 
-          <Grid xs={12} style={{ background: "#f4f4f4", padding: "8px", }}>
 
-            <Typography style={{ fontWeight: "bold", borderRadius: "4px", color: "#00" }}>
-            Trip Summary Dashboard
-          </Typography>
-          </Grid>   
-            
-          <Grid container xs={12}>
-            <Grid xs={3}>
-              <Typography>
-                Vehicles in Network
+        <Grid container xs={12} style={{ display: "inline-flex", marginTop: "6px" }}>
+
+        <Grid xs={12} style={{ background: "#f4f4f4", padding: "8px", }}>
+
+              <Typography style={{ fontWeight: "bold", borderRadius: "4px", color: "#00" }}>
+                GPS Vehicle Status
               </Typography>
+        </Grid>
+
+
+
+            <Grid xs={1}>
+
             </Grid>
 
-            <Grid xs={3}>
-              <Typography>
-                Vehicles Out Of Network :
+            <Grid xs={3} style={{ paddingLeft: "20px" }}>
+              <Typography style={{ marginTop: "6px", marginLeft: "108px", fontSize: "12px", fontWeight: "bold" }}>
+                GPS Vehicle  Pie Chart
               </Typography>
+              <PieChart />
             </Grid>
 
-            <Grid xs={3}>
-              <Typography>
-                Non Active Devices :
-              </Typography>
+            <Grid xs={1}>
             </Grid>
+            <Grid xs={5} style={{ padding: "20px", marginLeft: "30px", marginTop: "45px" }}>
+              {
+                header2.map((head, index) => (
+                  <Grid xs={5} style={{ background: "#f4f4f4", padding: "8px", marginBottom: "16px", border: "1px solid black", borderRadius: "6px" }}>
 
-            <Grid xs={3}>
-              <Typography>
-                Vehicles under Maintenance :
-              </Typography>
+                    <Typography style={{ fontWeight: "bold", borderRadius: "4px", color: "#00" }}>
+
+                      {head.label}
+                    </Typography>
+                  </Grid>
+                ))
+              }
             </Grid>
           </Grid>
-        </Paper>
+
+          </Paper>
+
+          
       </Container>
     </div>
   )
