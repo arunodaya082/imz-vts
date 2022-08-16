@@ -43,7 +43,7 @@ export default function LockTable({columns,rows}) {
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row) => {
                 return (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={row.code} style={{padding:"8px"}}>
+                  <TableRow hover role="checkbox" tabIndex={-1} key={row.srno} style={{padding:"8px"}}>
                     {columns.map((column) => {
                       const value = row[column.id];
                       return (

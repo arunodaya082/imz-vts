@@ -18,7 +18,7 @@ const Sidebar = () => {
   const [windowheight, setWindowHeight] = React.useState(window.innerHeight);
   
   
-  const { isOpen } = useContext(SidebarContext);
+  const { isopen } = useContext(SidebarContext);
   const history = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
   
@@ -46,13 +46,13 @@ const Sidebar = () => {
 
   return (
  
-    <div className='sidebar' style={{ width: isOpen ? "220px" : "60px", flex: isOpen ? 0.1 : 0.3}}>
+    <div className='sidebar' style={{ width: isopen ? "220px" : "60px", flex: isopen ? 0.1 : 0.3}}>
       <div className='top-menu'>
         <div className='navlink dropdown' onClick={() => handleClick('/')}>
           <div className='sidebar_icon' style={{ width: '20px' }}>
             <Dashboard />
           </div>
-          {isOpen ? <div className='sidebar_title text-white ml-2 font-weight-bolder' >Dashboard </div> : ""}
+          {isopen ? <div className='sidebar_title text-white ml-2 font-weight-bolder' >Dashboard </div> : ""}
         </div>
 
         <div className='showDivReport'>
@@ -86,7 +86,7 @@ const Sidebar = () => {
             <LocationOnIcon />
           </div>
 
-          {isOpen ? <div className='sidebar_title text-white ml-2 font-weight-bolder' >Live Status </div> : ""}
+          {isopen ? <div className='sidebar_title text-white ml-2 font-weight-bolder' >Live Status </div> : ""}
         </div>
         <Divider />
 
@@ -96,7 +96,7 @@ const Sidebar = () => {
             <StoreIcon />
           </div>
 
-          {isOpen ? <div className='sidebar_title text-white ml-2 font-weight-bolder'>Inventory Management </div> : ""}
+          {isopen ? <div className='sidebar_title text-white ml-2 font-weight-bolder'>Inventory Management </div> : ""}
         </div>
 
         <Divider />
@@ -107,7 +107,7 @@ const Sidebar = () => {
             <MapIcon />
           </div>
 
-          {isOpen ? <div className='sidebar_title text-white ml-2 font-weight-bolder' >Maps </div> : ""}
+          {isopen ? <div className='sidebar_title text-white ml-2 font-weight-bolder' >Maps </div> : ""}
         </div>
         <Divider />
 
@@ -120,7 +120,7 @@ const Sidebar = () => {
           {/* <img style={{ opacity: window.location.pathname.split("/")[1] == 'reportsgps' || window.location.pathname.split("/")[1] == 'reports' ? 1 : 0.5 }} className='ml-1' src={reportIcon} alt='route' /> */}
            <DescriptionIcon/>
           </div>
-          {isOpen ?  <div className='sidebar_title text-white ml-2 font-weight-bolder'>Reports </div>:""}
+          {isopen ?  <div className='sidebar_title text-white ml-2 font-weight-bolder'>Reports </div>:""}
         </div>
         
         
@@ -174,4 +174,4 @@ const Sidebar = () => {
   )
 }
 
-export default Sidebar;
+export default Sidebar; 

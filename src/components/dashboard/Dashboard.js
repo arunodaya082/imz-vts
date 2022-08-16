@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
 
 function Dashboard() {
   const classes = useStyles();
-  const { isOpen } = useContext(SidebarContext);
+  const { isopen } = useContext(SidebarContext);
 
   const [searchbar, setSearchbar] = useState(true);
 
@@ -102,12 +102,12 @@ function Dashboard() {
 
   const topViewData = { 'title': 'Home ', 'subTitleFirst': '/ Dashboard ', 'subTitleSecond': '', 'subTitleThird': '', 'buttonIcon': true, "buttonText": ' Add User', 'ButtonClick': "", 'backPath': '/dashboard', 'backPathSecond': '/maps', 'addButtonPath': '/adduser', 'addButton': false, 'addCancelClick': '', 'addClick': '', 'editButton': false, 'editButtonClick': '', 'updatePermission': [], 'updateButton': false, 'goBackEditClick': '', 'updateClick': '', 'addButtonPermission': "" }
   return (
-    <div className='dashboard_home' style={{ marginLeft: isOpen ? "201px" : "14px" }} >
-      <Container style={{ paddingRight: isOpen ? '5px' : "13px" }} >
+    <div className='dashboard_home' style={{ marginLeft: isopen ? "201px" : "14px" }} >
+      <Container style={{ paddingRight: isopen ? '5px' : "13px" }} >
 
 
         {/* top page header  */}
-        <div style={{ marginLeft: isOpen ? "24px" : "12px" }}>
+        <div style={{ marginLeft: isopen ? "24px" : "12px" }}>
           <Pageheader data={topViewData} />
         </div>
 
@@ -115,7 +115,7 @@ function Dashboard() {
         {/* dashboard search section  */}
 
         {!searchbar &&
-          <Grid container xs={12} style={{ marginLeft: isOpen ? "25px" : "10px" }}>
+          <Grid container xs={12} style={{ marginLeft: isopen ? "25px" : "10px" }}>
 
             <Grid xs={7} style={{ marginTop: "16px" }}>
 
@@ -195,7 +195,7 @@ function Dashboard() {
         }
 
 
-<Paper className={classes.paper} id='left' style={{ width: isOpen ? '106%' : '112%', padding: '0.5rem', marginLeft: isOpen ? "25px" : "10px" }}>
+<Paper className={classes.paper} id='left' style={{ width: isopen ? '106%' : '112%', padding: '0.5rem', marginLeft: isopen ? "25px" : "10px" }}>
 
 <Typography>
   Alerts:
@@ -234,7 +234,7 @@ function Dashboard() {
 
         {/* gps health dashboard data view */}
 
-        <Paper className={classes.paper} id='left' style={{ width: isOpen ? '106%' : '112%', padding: '0.5rem', marginLeft: isOpen ? "25px" : "10px" }}>
+        <Paper className={classes.paper} id='left' style={{ width: isopen ? '106%' : '112%', padding: '0.5rem', marginLeft: isopen ? "25px" : "10px" }}>
 
           <Grid xs={12} style={{ background: "#f4f4f4", padding: "8px", }}>
 
@@ -280,7 +280,7 @@ function Dashboard() {
 
           {/* Gps Vehicle Status */}
 
-        <Paper className={classes.paper} id='left' style={{ width: isOpen ? '106%' : '112%', padding: '0.5rem', marginLeft: isOpen ? "25px" : "10px" }}>
+        <Paper className={classes.paper} id='left' style={{ width: isopen ? '106%' : '112%', padding: '0.5rem', marginLeft: isopen ? "25px" : "10px" }}>
 
 
         <Grid container xs={12} style={{ display: "inline-flex", marginTop: "6px" }}>

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import "./sidebar.css";
-import useWindowDimensions from "../custom_hooks/useDimensions";
 import { useNavigate } from "react-router-dom";
 import { Dashboard } from '@material-ui/icons';
 import StoreIcon from '@material-ui/icons/Store';
@@ -12,14 +11,14 @@ import {RiLogoutBoxRFill} from "react-icons/ri";
 import { SidebarContext } from './sidebarContext';
 import { useContext } from 'react';
 import {TbReportAnalytics} from "react-icons/tb";
+import {FaRoute} from "react-icons/fa";
+import useWindowSize from '../custom_hooks/useWindow';
 
 const Sidebar = () => {
 
-  const { height, width } = useWindowDimensions();
+const { width } = useWindowSize();
 
-
-
-  const { isOpen } = useContext(SidebarContext);
+  const { isopen } = useContext(SidebarContext);
   const history = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -35,14 +34,15 @@ const Sidebar = () => {
   }
 
   return (
-    
-    <div className='sidebar' style={{ width: isOpen ? "220px" : "60px", flex: isOpen ? 0.1 : 0.3 }}>
+    <>
+    {width > 500 && (
+    <div className='sidebar' style={{ width: isopen ? "220px" : "60px", flex: isopen ? 0.1 : 0.3 }}>
       <div className='top-menu'>
-        <div className='navlink active' onClick={() => handleClick('/')}>
+        <div className='navlink active' onClick={() => handleClick('dashboard')}>
           <div className='sidebar_icon' style={{ width: '20px' }}>
             <Dashboard />
           </div>
-          {isOpen ? <div className='sidebar_title text-white ml-2 font-weight-bolder' >Dashboard </div> : ""}
+          {isopen ? <div className='sidebar_title text-white ml-2 font-weight-bolder' >Dashboard </div> : ""}
         </div>
         <Divider />
 
@@ -50,7 +50,7 @@ const Sidebar = () => {
           <div className='sidebar_icon' style={{ width: '20px' }}>
             <Dashboard />
           </div>
-          {isOpen ? <div className='sidebar_title text-white ml-2 font-weight-bolder' >Trip Dashboard </div> : ""}
+          {isopen ? <div className='sidebar_title text-white ml-2 font-weight-bolder' >Trip Dashboard </div> : ""}
         </div>
         <Divider />
 
@@ -61,7 +61,7 @@ const Sidebar = () => {
             <LocationOnIcon />
           </div>
 
-          {isOpen ? <div className='sidebar_title text-white ml-2 font-weight-bolder' >Live Status </div> : ""}
+          {isopen ? <div className='sidebar_title text-white ml-2 font-weight-bolder' >Live Status </div> : ""}
         </div>
         <Divider />
 
@@ -71,7 +71,7 @@ const Sidebar = () => {
             <StoreIcon />
           </div>
 
-          {isOpen ? <div className='sidebar_title text-white ml-2 font-weight-bolder'>Inventory Management </div> : ""}
+          {isopen ? <div className='sidebar_title text-white ml-2 font-weight-bolder'>Inventory Management </div> : ""}
         </div>
 
         <Divider />
@@ -82,7 +82,17 @@ const Sidebar = () => {
             <MapIcon />
           </div>
 
-          {isOpen ? <div className='sidebar_title text-white ml-2 font-weight-bolder' >Maps </div> : ""}
+          {isopen ? <div className='sidebar_title text-white ml-2 font-weight-bolder' >Maps </div> : ""}
+        </div>
+        <Divider />
+
+        <div className='navlink ' onClick={() => handleClick('routes')}>
+          <div className='sidebar_icon' style={{ width: '20px' }}>
+
+            <FaRoute />
+          </div>
+
+          {isopen ? <div className='sidebar_title text-white ml-2 font-weight-bolder' >Route Management </div> : ""}
         </div>
         <Divider />
 
@@ -95,7 +105,7 @@ const Sidebar = () => {
           {/* <img style={{ opacity: window.location.pathname.split("/")[1] == 'reportsgps' || window.location.pathname.split("/")[1] == 'reports' ? 1 : 0.5 }} className='ml-1' src={reportIcon} alt='route' /> */}
            <DescriptionIcon/>
           </div>
-          {isOpen ?  <div className='sidebar_title text-white ml-2 font-weight-bolder'>Reports </div>:""}
+          {isopen ?  <div className='sidebar_title text-white ml-2 font-weight-bolder'>Reports </div>:""}
         </div>
         
         
@@ -107,7 +117,7 @@ const Sidebar = () => {
                  {/* <img style={{ opacity: window.location.search.split("?")[1] == 'type=Summary' ? 1 : 0.5 }} src={SummaryIcon} alt='route' /> */}
                  <TbReportAnalytics/>
             </div>
-            <div className='sidebarsubmenu_title text-white ml-2 font-weight-bolder' > Summary Report </div>
+            <div className='sidebarsubmenu_title text-white ml-3 font-weight-bolder' > Summary Report </div>
 
           </div>
           <Divider />
@@ -117,7 +127,7 @@ const Sidebar = () => {
              {/* <img style={{ opacity: window.location.search.split("?")[1] == 'type=running' ? 1 : 0.5 }} src={RunningIcon} alt='route' /> */}
              <TbReportAnalytics/>
             </div>
-            <div className='sidebarsubmenu_title text-white ml-2 font-weight-bolder' > Movement Report  </div>
+            <div className='sidebarsubmenu_title text-white ml-3 font-weight-bolder' > Movement Report  </div>
 
           </div>
           <Divider />
@@ -126,7 +136,7 @@ const Sidebar = () => {
             {/* <img style={{ opacity: window.location.search.split("?")[1] == 'type=overspeed' ? 1 : 0.5 }} src={OverSpeedIcon} alt='route' /> */}
             <TbReportAnalytics/>
             </div>
-            <div className='sidebarsubmenu_title text-white ml-2 font-weight-bolder' > Over Speed Report  </div>
+            <div className='sidebarsubmenu_title text-white ml-3 font-weight-bolder' > Over Speed Report  </div>
           </div>
           
           <Divider/>
@@ -144,6 +154,10 @@ const Sidebar = () => {
                 </div>
             </div>
       </div>
+
+)
+}
+</>
 
     
   )

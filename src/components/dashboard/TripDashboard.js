@@ -7,8 +7,9 @@ import { SidebarContext } from '../common/sidebar/sidebarContext';
 import { useContext } from 'react';
 import { makeStyles } from '@material-ui/core';
 import Pageheader from '../common/PageHeader/pageheader2';
-import {FiTruck} from "react-icons/fi";
+import { FiTruck } from "react-icons/fi";
 import LockTable from '../common/tablelist';
+import useFetch from '../common/custom_hooks/useFetch';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -42,8 +43,8 @@ const useStyles = makeStyles((theme) => ({
 
 
 const columns = [
-  { id: 'srno', label: 'Sr. No.', minWidth: 50,align: 'center' },
-  { id: 'date', label: 'Date', minWidth: 100,align: 'center' },
+  { id: 'srno', label: 'Sr. No.', minWidth: 50, align: 'center' },
+  { id: 'date', label: 'Date', minWidth: 100, align: 'center' },
   {
     id: 'deviceId',
     label: 'Device ID',
@@ -63,7 +64,7 @@ const columns = [
     label: 'IMEI',
     minWidth: 100,
     align: 'center',
-    
+
   },
   {
     id: 'tracking',
@@ -74,39 +75,23 @@ const columns = [
   },
 ];
 
-function createData(srno,date,deviceId,vehcileNo,imei,tracking) {
-  
-  return { srno,date,deviceId, vehcileNo, imei, tracking };
+function createData(srno, date, deviceId, vehcileNo, imei, tracking) {
+
+  return { srno, date, deviceId, vehcileNo, imei, tracking };
 }
 
 const rows = [
-  createData('1','03/08/2022','India', 'IN', 1324171354, 3287263),
-  createData('2','03/08/2022','China', 'CN', 1403500365, 9596961),
-  createData('3','03/08/2022','Italy', 'IT', 60483973, 301340),
-  createData('4','03/08/2022','United States', 'US', 327167434, 9833520),
-  createData('5','03/08/2022','Canada', 'CA', 37602103, 9984670),
-  createData('6','03/08/2022','Australia', 'AU', 25475400, 7692024),
-  createData('7','03/08/2022','Germany', 'DE', 83019200, 357578),
-  createData('8','03/08/2022','Ireland', 'IE', 4857000, 70273),
-  createData('9','03/08/2022','Mexico', 'MX', 126577691, 1972550),
-  createData('10','03/08/2022','Japan', 'JP', 126317000, 377973),
-  createData('11','03/08/2022','France', 'FR', 67022000, 640679),
-  createData('12','03/08/2022','United Kingdom', 'GB', 67545757, 242495),
-  createData('13','03/08/2022','Russia', 'RU', 146793744, 17098246),
-  createData('14','03/08/2022','Nigeria', 'NG', 200962417, 923768),
-  createData('15','03/08/2022','Brazil', 'BR', 210147125, 8515767),
+  createData('1', '03/08/2022', 'HR-01', 'HR26EV2989', 1324171354, "Vk-Gurgaon"),
+  createData('2', '03/08/2022', 'HR-02', 'HR26AW1236', 1403500365, "Gurgaon-vk"),
+  createData('3', '03/08/2022', 'HR-01', 'HR26EV2989', 1324171354, "Vk-Gurgaon"),
+  createData('4', '03/08/2022', 'HR-02', 'HR26AW1236', 1403500365, "Gurgaon-vk"),
+  createData('5', '03/08/2022', 'HR-01', 'HR26EV2989', 1324171354, "Vk-Gurgaon"),
+  createData('6', '03/08/2022', 'HR-02', 'HR26AW1236', 1403500365, "Gurgaon-vk"),
 ];
 
 
 
-export const data = [
-  ["Task", "Hours per Day"],
-  ["Work", 11],
-  ["Eat", 2],
-  ["Commute", 2],
-  ["Watch TV", 2],
-  ["Sleep", 7],
-];
+
 
 export const options = {
   title: "My Daily Activities",
@@ -114,7 +99,9 @@ export const options = {
 
 function TripDashboard() {
   const classes = useStyles();
-  const { isOpen } = useContext(SidebarContext);
+  const { isopen } = useContext(SidebarContext);
+
+  const { data: quote, loading, error } = useFetch('https://api.quotable.io/random')
 
   const [searchbar, setSearchbar] = useState(true);
 
@@ -141,12 +128,12 @@ function TripDashboard() {
 
   const topViewData = { 'title': 'Home ', 'subTitleFirst': '/ Dashboard ', 'subTitleSecond': '/ Gps dashboard', 'subTitleThird': '', 'buttonIcon': true, "buttonText": ' Add User', 'ButtonClick': "", 'backPath': '/dashboard', 'backPathSecond': '/maps', 'addButtonPath': '/adduser', 'addButton': false, 'addCancelClick': '', 'addClick': '', 'editButton': false, 'editButtonClick': '', 'updatePermission': [], 'updateButton': false, 'goBackEditClick': '', 'updateClick': '', 'addButtonPermission': "" }
   return (
-    <div className='dashboard_home' style={{ marginLeft: isOpen ? "201px" : "14px" }} >
-      <Container style={{ paddingRight: isOpen ? '5px' : "13px" }} >
+    <div className='dashboard_home' style={{ marginLeft: isopen ? "201px" : "14px" }} >
+      <Container style={{ paddingRight: isopen ? '5px' : "13px" }} >
 
 
         {/* top page header  */}
-        <div style={{ marginLeft: isOpen ? "24px" : "12px" }}>
+        <div style={{ marginLeft: isopen ? "24px" : "12px" }}>
           <Pageheader data={topViewData} />
         </div>
 
@@ -154,13 +141,15 @@ function TripDashboard() {
         {/* dashboard search section  */}
 
         {!searchbar &&
-          <Grid container xs={12} style={{ marginLeft: isOpen ? "25px" : "10px" }}>
+          <Grid container xs={12} style={{ marginLeft: isopen ? "25px" : "10px" }}>
 
             <Grid xs={7} style={{ marginTop: "16px" }}>
 
               <Typography style={{ marginLeft: "4px", marginTop: "22px", fontWeight: "bold", fontSize: "20px" }}>
                 <h5>
                   Dashboard
+
+                  
                 </h5>
               </Typography>
 
@@ -169,7 +158,7 @@ function TripDashboard() {
             {/* search with options  */}
             <Grid container xs={5} style={{ alignItems: "flex-end" }}>
               <Grid xs={5}>
-                <Typography style={{ marginTop: "16px", fontSize: "18px", fontWeight: "bold",   }}>
+                <Typography style={{ marginTop: "16px", fontSize: "18px", fontWeight: "bold", }}>
                   <Autocomplete id='header'
                     getOptionLabel={(region) => region.name}
 
@@ -195,7 +184,7 @@ function TripDashboard() {
 
               <Grid xs={5}>
 
-                <Typography style={{ marginTop: "16px", fontSize: "18px", fontWeight: "bold",   }}>
+                <Typography style={{ marginTop: "16px", fontSize: "18px", fontWeight: "bold", }}>
                   <Autocomplete id='header'
                     getOptionLabel={(hub) => hub.name}
 
@@ -220,10 +209,10 @@ function TripDashboard() {
 
               <Grid item xs={2} >
 
-                <Typography gutterBottom variant="subtitle1" style={{ marginTop: "24px", fontSize: "18px", fontWeight: "bold",   }}>
-                    <Button variant="contained" style={{ padding: '6px' }} >
-                      Search
-                    </Button>
+                <Typography gutterBottom variant="subtitle1" style={{ marginTop: "24px", fontSize: "18px", fontWeight: "bold", }}>
+                  <Button variant="contained" style={{ padding: '6px' }} >
+                    Search
+                  </Button>
                 </Typography>
 
               </Grid>
@@ -236,7 +225,7 @@ function TripDashboard() {
 
         {/* gps health dashboard data view */}
 
-        <Paper className={classes.paper} id='left' style={{ width: isOpen ? '106%' : '112%', padding: '0.5rem', marginLeft: isOpen ? "25px" : "10px" }}>
+        <Paper className={classes.paper} id='left' style={{ width: isopen ? '106%' : '112%', padding: '0.5rem', marginLeft: isopen ? "25px" : "10px" }}>
 
           <Grid xs={12} style={{ background: "#f4f4f4", padding: "8px", }}>
 
@@ -245,53 +234,52 @@ function TripDashboard() {
             </Typography>
           </Grid>
 
-          <Grid container xs={12} style={{padding:"16px"}}>
+          <Grid container xs={12} style={{ padding: "16px" }}>
 
-          <Grid container xs={12}>
-            <Grid xs={3}>
-              <Typography>
-                Vehicles in Network
-              </Typography>
+            <Grid container xs={12}>
+              <Grid xs={3}>
+                <Typography>
+                  Total Trips Today
+                </Typography>
+              </Grid>
+
+              <Grid xs={3}>
+                <Typography>
+                  Vehicle On Trip :
+                </Typography>
+              </Grid>
+
+              <Grid xs={3}>
+                <Typography>
+                  Completed Trips :
+                </Typography>
+              </Grid>
+
+              <Grid xs={3}>
+                <Typography>
+                  Delayed Trips :
+                </Typography>
+              </Grid>
+
             </Grid>
-
-            <Grid xs={3}>
-              <Typography>
-                Vehicles Out Of Network :
-              </Typography>
-            </Grid>
-
-            <Grid xs={3}>
-              <Typography>
-                Non Active Devices :
-              </Typography>
-            </Grid>
-
-            <Grid xs={3}>
-              <Typography>
-                Vehicles under Maintenance :
-              </Typography>
-            </Grid>
-
           </Grid>
-        </Grid>
 
 
-        <Paper>
+          {/* <Paper> */}
 
-        <Grid container xs={12} style={{padding:"20px"}}>
-          
-          <Typography style={{fontWeight:"bold",margin:"6px"}}>
-            Active Vehicles
-          </Typography>
+          <Grid container xs={12} style={{ padding: "20px" }}>
 
-          <LockTable columns={columns} rows={rows}/>
+            <Typography style={{ fontWeight: "bold", margin: "6px" }}>
 
-        
-        </Grid>
+              Active Vehicles
+            </Typography>
+
+            <LockTable columns={columns} rows={rows} />
+          </Grid>
 
 
 
-        </Paper>
+          {/* </Paper> */}
 
 
         </Paper>

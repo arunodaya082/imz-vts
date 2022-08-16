@@ -52,18 +52,18 @@ export const options = {
 
 function Misreports() {
   const classes = useStyles();
-  const { isOpen } = useContext(SidebarContext);
+  const { isopen } = useContext(SidebarContext);
 
  
 
   const topViewData = { 'title': 'Home ', 'subTitleFirst': '/ Mis Report ', 'subTitleSecond': '', 'subTitleThird': '', 'buttonIcon': true, "buttonText": ' Add User', 'ButtonClick': "", 'backPath': '/dashboard', 'backPathSecond': '/maps', 'addButtonPath': '/adduser', 'addButton': false, 'addCancelClick': '', 'addClick': '', 'editButton': false, 'editButtonClick': '', 'updatePermission': [], 'updateButton': false, 'goBackEditClick': '', 'updateClick': '', 'addButtonPermission': "" }
   return (
-    <div className='dashboard_home' style={{ marginLeft: isOpen ? "201px" : "14px" }} >
-      <Container style={{ paddingRight: isOpen ? '5px' : "13px" }} >
+    <div className='dashboard_home' style={{ marginLeft: isopen ? "201px" : "14px" }} >
+      <Container style={{ paddingRight: isopen ? '5px' : "13px" }} >
 
 
         {/* top page header  */}
-        <div style={{ marginLeft: isOpen ? "24px" : "12px" }}>
+        <div style={{ marginLeft: isopen ? "24px" : "12px" }}>
           <Pageheader data={topViewData} />
         </div>
 
@@ -74,7 +74,7 @@ function Misreports() {
 
         {/* gps health dashboard data view */}
 
-        <Paper className={classes.paper} id='left' style={{ width: isOpen ? '106%' : '112%', padding: '0.5rem', marginLeft: isOpen ? "25px" : "10px" }}>
+        <Paper className={classes.paper} id='left' style={{ width: isopen ? '106%' : '112%', padding: '0.5rem', marginLeft: isopen ? "25px" : "10px" }}>
 
           <h1>Under Development... </h1>
           

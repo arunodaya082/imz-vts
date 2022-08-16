@@ -5,8 +5,8 @@ import Pageheader from '../common/PageHeader/pageheader2';
 import { SidebarContext } from '../common/sidebar/sidebarContext';
 import { useContext } from 'react';
 import { makeStyles } from '@material-ui/core';
+import Marker from "./marker";
 
-const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
 const useStyles = makeStyles((theme) => ({
 
@@ -40,7 +40,7 @@ const topViewData = { 'title': 'Home ', 'subTitleFirst': '/ Map ', 'subTitleSeco
 export default function SimpleMap(){
 
   const classes = useStyles();
-  const { isOpen } = useContext(SidebarContext);
+  const { isopen } = useContext(SidebarContext);
   const defaultProps = {
     center: {
       lat: 28.495761,
@@ -51,32 +51,35 @@ export default function SimpleMap(){
 
   return (
     // Important! Always set the container height explicitly
-    <div className='dashboard_home' xs={12} md={12} lg={12} style={{ marginLeft: isOpen ? "201px" : "14px" }} >
-    <Container style={{ paddingRight: isOpen ? '5px' : "13px" }} >
+    <div className='dashboard_home' xs={12} md={12} lg={12} style={{ marginLeft: isopen ? "201px" : "14px" }} >
+    <Container style={{ paddingRight: isopen ? '5px' : "13px" }} >
 
 
-    <div style={{ marginLeft: isOpen ? "24px" : "12px" }}>
+    <div style={{ marginLeft: isopen ? "24px" : "12px" }}>
           <Pageheader data={topViewData} />
         </div>
       {/* top page header  */}
 
 
-      <Paper className={classes.paper} id='left' style={{ width: isOpen ? '106%' : '112%', padding: '0.5rem', marginLeft: isOpen ? "25px" : "10px" }}>
+      <Paper className={classes.paper} id='left' style={{ width: isopen ? '106%' : '112%', padding: '0.5rem', marginLeft: isopen ? "25px" : "10px" }}>
 
 
     <div style={{ height: '100vh', width: '100%' }}>
 
-      <GoogleMapReact
-        bootstrapURLKeys={{ key: "AIzaSyAxu4AIfJS8BOI8H3LYIOB40YWIaE3UdX0" }}
-        defaultCenter={defaultProps.center}
-        defaultZoom={defaultProps.zoom}
-      >
-        <AnyReactComponent
-          lat= {28.495761}
-          lng= {77.079330}
-          text="My Marker"
-        />
-      </GoogleMapReact>
+    <GoogleMapReact
+          bootstrapURLKeys={{ key: 'AIzaSyAxu4AIfJS8BOI8H3LYIOB40YWIaE3UdX0' }}
+          defaultCenter={defaultProps.center}
+          defaultZoom={defaultProps.zoom}
+          // options={getMapOptions}
+        >
+          <Marker
+            lat={28.495582}
+            lng={77.079365}
+            name="My Marker"
+            color="blue"
+           
+          />
+        </GoogleMapReact>
     </div>
 
     </Paper>

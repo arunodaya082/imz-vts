@@ -11,6 +11,7 @@ import Reports from './components/Mis_Reports/Reports';
 import SimpleMap from './components/Maps/map';
 import EmergencyReport from './components/Mis_Reports/emergencyReport';
 import { SidebarContext } from './components/common/sidebar/sidebarContext';
+import RouteList from './components/Route_Management/routelist';
 
 
 
@@ -33,17 +34,19 @@ const App = () => {
       <Router>
      
      
-      <SidebarContext.Provider value={{isOpen: sidebarOpen, sidebarToggle: handleSidebar}}>
+      <SidebarContext.Provider value={{isopen: sidebarOpen, sidebarToggle: handleSidebar}}>
       <Header  />
       <div className='homepage'>
       
       <Sidebar  />
         <Routes>
-          <Route  path="/" element={<Dashboard />} />
+        <Route  path="/" element={<Dashboard />} />
+          <Route  path="/dashboard" element={<Dashboard />} />
           {/* <Route  path="/" element={<GpsHealthDashboard />} /> */}
           <Route  path='/tripdashboard' element={<TripDashboard />} /> 
           <Route path='live' element={<Vehiclelive/>} />
           <Route path='maps' element={<SimpleMap/>}/>
+          <Route path='route' element={<RouteList/>}/>
           <Route path='inventory' element={<Inventory/>} /> 
           <Route path='reports' element={<Reports/>}/>
         </Routes>

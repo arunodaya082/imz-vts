@@ -1,17 +1,13 @@
 import React, { useState } from 'react';
-import { Container, Paper, Typography, Grid, Button, TextField } from '@material-ui/core';
+import { Container, Paper, Typography, Grid, Button, TextField, } from '@material-ui/core';
+import { Autocomplete } from '@material-ui/lab';
 import { SidebarContext } from '../common/sidebar/sidebarContext';
 import { useContext } from 'react';
 import { makeStyles } from '@material-ui/core';
 import Pageheader from '../common/PageHeader/pageheader2';
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
-import LockTable from "../common/tablelist";
 import { useEffect } from 'react';
 import { TrackingAction } from '../../actions/tracking';
+import LabTabs from '../common/tablist';
 
 const useStyles = makeStyles((theme) => ({
 
@@ -106,15 +102,19 @@ export const data = [
   ["Sleep", 7],
 ];
 
-export const options = {
-  title: "My Daily Activities",
-};
+
 
 function Vehiclelive() {
   const classes = useStyles();
-  const { isOpen } = useContext(SidebarContext);
+  const { isopen } = useContext(SidebarContext);
 
-  const [deviceList,setDeviceList] = useState([]);
+  const [deviceList,setDeviceList] = useState([
+    {id:0,name:"Device ID"},
+    {id:1,name:"Vehicle No"},
+    {id:2,name:"IMEI No"}
+  ]);
+
+
   const [selectType, setSelectType] = useState(" ");
   const [typeValue, setTypeValue] = useState("");
   const [fromDate, setFromDate] = useState("");
@@ -180,18 +180,18 @@ function Vehiclelive() {
   }
 
   return (
-    <div className='dashboard_home' xs={12} md={12} lg={12} style={{ marginLeft: isOpen ? "201px" : "14px" }} >
-      <Container style={{ paddingRight: isOpen ? '5px' : "13px" }} >
+    <div className='dashboard_home' xs={12} md={12} lg={12} style={{ marginLeft: isopen ? "201px" : "14px" }} >
+      <Container style={{ paddingRight: isopen ? '5px' : "13px" }} >
 
 
         {/* top page header  */}
-        <div style={{ marginLeft: isOpen ? "24px" : "12px" }}>
+        <div style={{ marginLeft: isopen ? "24px" : "12px" }}>
           <Pageheader data={topViewData} />
         </div>
 
 
-        <Paper className={classes.paper} id='left' style={{ width: isOpen ? '106%' : '112%', padding: '0.5rem', marginLeft: isOpen ? "25px" : "10px" }}>
-          <Grid xs={12} style={{ marginLeft: "24px" }}>
+        <Paper className={classes.paper} id='left' style={{ width: isopen ? '106%' : '112%', padding: '0.5rem', marginLeft: isopen ? "25px" : "10px" }}>
+          <Grid xs={12} style={{ marginLeft: "26px" }}>
             <Typography
               style={{ padding: "6px", fontWeight: "bolder", marginTop: "6px", display: "inline-flex", }}>
               Track Trip
@@ -201,14 +201,14 @@ function Vehiclelive() {
 
 
           {/* select options */}
-          <Paper style={{margin:"20px",backgroundColor:"#fff"}}>
+          {/* <Paper style={{margin:"20px",backgroundColor:"#fff"}}> */}
 
-          <Grid container xs={12} direction="row" style={{ marginLeft: "8px", padding: "12px" }}>
+          <Grid container xs={12} direction="row" style={{ marginLeft: "8px", padding: "6px" }}>
           
-          <Grid container xs={12}>
-            <Grid xs={6}  >
+          
+            <Grid xs={2} style={{marginLeft:"16px",marginRight:"4px",marginTop:"6px"}} >
 
-              <FormControl >
+              {/* <FormControl >
                 <FormLabel id="demo-row-radio-buttons-group-label">Select Type</FormLabel>
                 <RadioGroup
                   row
@@ -222,21 +222,20 @@ function Vehiclelive() {
                   <FormControlLabel value="1" control={<Radio />} label="Vehicle No." />
                   <FormControlLabel value="2" control={<Radio />} label="IMEI No." />
                 </RadioGroup>
-              </FormControl>
+              </FormControl> */}
 
 
-
-
-                          {/* <Typography style={{ marginTop: "16px", fontSize: "18px", fontWeight: "bold", padding: "6px" }}>
+               <Typography style={{fontSize: "12px", fontWeight: "bold"}}>
                             Select Type
+                </Typography> 
                                     <Autocomplete id='header'
-                                        getOptionLabel={(typeMenu) => typeMenu.name}
+                                        getOptionLabel={(deviceList) => deviceList.name}
 
-                                        options={typeMenu || []}
+                                        options={deviceList || []}
                                         getOptionSelected={(option, value) => option.name === value.name}
-                                        value={selectTypeMenu}
+                                        value={selectType}
 
-                                        onChange={(event, newValue) => setSelectTypeMenu(newValue)}
+                                        onChange={(event, newValue) => setSelectType(newValue)}
                                         renderInput={(params) =>
                                             <TextField
                                               {...params}
@@ -244,25 +243,25 @@ function Vehiclelive() {
                                                 margin='dense'
                                                 color="primary"
                                                 size="small"
-                                                style={{ background: "#fff", color: "#000" }}
+                                                style={{marginLeft:"2px",marginTop:"2px",background:'#fff'}}
                                                 placeholder='Select Type'
 
                                             />
                                         }
                                     />
-                                </Typography> */}
+                                
             </Grid>
-          </Grid>
+        
 
 
 
 
-            <Grid container xs={12}>
+           
           
             {/* form filling for tracking */}
 
-              <Grid xs={2}>
-              <Typography style={{ marginTop: "16px", fontSize: "12px", fontWeight: "bold"}}>
+              <Grid xs={2} style={{marginLeft:"16px",marginTop:"6px"}}>
+              <Typography style={{fontSize: "12px", fontWeight: "bold"}}>
                 Enter  Value
               </Typography>  
 
@@ -281,14 +280,14 @@ function Vehiclelive() {
               </Grid>
            
 
-              <Grid xs={2} style={{paddingLeft:"20px",marginTop:"6px"}}>
-              <Typography style={{marginTop:"12px",fontSize: "12px", fontWeight: "bold"}}>
+              <Grid xs={2} style={{marginLeft:"16px",marginTop:"8px"}}>
+              <Typography style={{fontSize: "12px", fontWeight: "bold"}}>
                 Select From Date
               </Typography>  
 
                 <TextField
                   id="outlined-basic"
-                  type="date"
+                  type="datetime-local"
                   variant="outlined"
                   size='small'
                   style={{marginLeft:"2px"}}
@@ -297,14 +296,14 @@ function Vehiclelive() {
                 />
               </Grid>
 
-              <Grid xs={2} style={{marginTop:"6px"}}>
-              <Typography style={{marginTop:"12px",fontSize: "12px", fontWeight: "bold"}}>
+              <Grid xs={2} style={{marginLeft:"24px",marginTop:"8px"}}>
+              <Typography style={{fontSize: "12px", fontWeight: "bold"}}>
                 Select To Date
               </Typography>  
 
                 <TextField
                   id="outlined-basic"
-                  type="date"
+                  type="datetime-local"
                   variant="outlined"
                   size='small'
                   style={{marginLeft:"2px"}}
@@ -312,36 +311,44 @@ function Vehiclelive() {
                   onChange={(e) => { setToDate(e.target.value) }}
                 />
               </Grid>
-            </Grid>
-
-          <Grid xs={12} style={{ marginTop: "22px", fontSize: "18px", fontWeight: "bold" }}>
+           
+          <Grid xs={2} style={{marginLeft:"20px",marginTop:"26px"}}>
             <Button type="button"
               variant="contained"
               onClick={search}
               // disabled={isLoading}
+              style={{paddingTop:"7px",}}
               color="primary"
 
               >
               Search
             </Button>
           </Grid>
+
+
           </Grid>
+         
  
-       </Paper>
+       
 
 
           {/* list table  */}
           
-          <Grid container xs={12} style={{padding:"20px"}}>
+          <Grid container xs={12} style={{padding:"24px"}}>
           
-            <Typography style={{fontWeight:"bold",margin:"6px"}}>
+            {/* <Typography style={{fontWeight:"bold",border:"1px solid black"}}>
               Track History
             </Typography>
 
-            <LockTable columns={columns} rows={rows}/>
+            <LockTable columns={columns} rows={rows}/> */
+            
+            }
+
+            <LabTabs/>
 
           
           </Grid>
+        
             
 
         </Paper>

@@ -1,5 +1,5 @@
 .sidebar { 
-  background-image: linear-gradient(to bottom, #f5f6f8, #c5d0dc, #92acbe, #5a8b9f, #0a6b7d);
+  background-image: linear-gradient(to bottom, #f5f6f8,#deedfb, #bfe7fb, #99e1f5, #6fdce6);
   position: fixed;
   top:50;
   height: 100%;
@@ -39,7 +39,7 @@
 
 .sidebarsubmenu_title{
   flex:1;
-margin-left: 12px;
+margin-left: 18px;
 font-size: 13px;
 font-weight: 500;
 margin-top: 8px;

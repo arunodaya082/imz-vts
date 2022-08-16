@@ -1,0 +1,21 @@
+.login,
+.image {
+  min-height: 100vh;
+}
+
+.bg-image {
+  /* background-image: url('https://bootstrapious.com/i/snippets/sn-page-split/bg.jpg'); */
+  background-size: cover;
+  background-position: center center;
+  /* transition: all 6s ease-in-out;
+  animation: image 6s infinite alternate; */
+}
+/* 
+@keyframes image {
+    0% {
+      background-image: url('../../assests/wtanker.jpg');
+    }
+    100% {
+      background-image: url('../../assests/tracking.jpg');
+    }
+  } */
