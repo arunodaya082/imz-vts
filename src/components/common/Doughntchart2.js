@@ -5,7 +5,9 @@ import { Doughnut } from 'react-chartjs-2';
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 export const data = {
-  labels: [],
+  labels: [ 'Red',
+  'Blue',
+  'Yellow'],
   datasets: [
     {
       label: '# of Votes',
@@ -29,9 +31,9 @@ export const data = {
   ],
 };
 
-const PieChart=()=> {
+const DoughntChart=()=> {
   return <Doughnut data={data} />;
 }
 
 
-export default PieChart;
+export default DoughntChart;

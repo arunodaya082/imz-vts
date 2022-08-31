@@ -71,6 +71,7 @@ export default function SimpleMap(){
           defaultCenter={defaultProps.center}
           defaultZoom={defaultProps.zoom}
           // options={getMapOptions}
+            
         >
           <Marker
             lat={28.495582}

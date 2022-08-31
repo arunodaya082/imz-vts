@@ -7,7 +7,7 @@ import { SidebarContext } from '../common/sidebar/sidebarContext';
 import { useContext } from 'react';
 import { makeStyles } from '@material-ui/core';
 import Pageheader from '../common/PageHeader/pageheader2';
-import PieChart from "../common/piechart2";
+import PieChart from "../common/Doughntchart2";
 import DChart from "../common/piechart";
 
 const useStyles = makeStyles((theme) => ({

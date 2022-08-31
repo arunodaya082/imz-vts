@@ -1,18 +1,32 @@
-import React, { useState } from 'react';
-import { Container, Paper, Typography, Grid, Button, TextField, } from '@material-ui/core';
+import React from 'react';
+import { useState } from 'react';
+import { useContext } from 'react';
+import "../dashboard/dashboard.css";
+import { Container, Paper, Typography, Grid, TextField, Button } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
 import { SidebarContext } from '../common/sidebar/sidebarContext';
-import { useContext } from 'react';
-import { makeStyles } from '@material-ui/core';
+import { lighten,makeStyles,Toolbar,InputAdornment } from '@material-ui/core';
+import TablePagination from '@material-ui/core/TablePagination';
 import Pageheader from '../common/PageHeader/pageheader2';
+import { Table,TableContainer,TableBody,TableHead,TableRow,TableCell } from '@mui/material';
+import PropTypes from 'prop-types';
 import { useEffect } from 'react';
-import { TrackingAction } from '../../actions/tracking';
 import LabTabs from '../common/tablist';
+import {IconButton} from '@material-ui/core';
+import SearchIcon from '@material-ui/icons/Search';
+import { AccountCircle } from '@material-ui/icons';
+
+
+
 
 const useStyles = makeStyles((theme) => ({
-
+  root: {
+    width: '100%',
+    marginTop: '7rem'
+  },
   paper: {
     marginBottom: theme.spacing(1),
+
   },
   table: {
     minWidth: 750,
@@ -36,77 +50,90 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const columns = [
-  { id: 'srno', label: 'Sr. No.', minWidth: 50,align: 'center' },
-  { id: 'date', label: 'Date', minWidth: 100,align: 'center' },
-  {
-    id: 'deviceId',
-    label: 'Device ID',
-    minWidth: 100,
-    align: 'center',
-    format: (value) => value.toLocaleString('en-US'),
-  },
-  {
-    id: 'vehcileNo',
-    label: 'Vehicle No.',
-    minWidth: 100,
-    align: 'center',
-    format: (value) => value.toLocaleString('en-US'),
-  },
-  {
-    id: 'imei',
-    label: 'IMEI',
-    minWidth: 100,
-    align: 'center',
-    
-  },
-  {
-    id: 'tracking',
-    label: 'Tracking Data',
-    minWidth: 170,
-    align: 'center',
-    format: (value) => value.toFixed(2),
-  },
+const headCells = [
+  { id: 'name', numeric: false, disablePadding: false, label: 'S No.' },
+  { id: 'name', numeric: false, disablePadding: false, label: 'User Details' },
+  { id: 'calories', numeric: true, disablePadding: false, label: 'Phone No. / Email' },
+  { id: 'fat', numeric: true, disablePadding: false, label: 'Role' },
+  // { id: 'carbs', numeric: true, disablePadding: false, label: 'Status' },
+
 ];
 
-function createData(srno,date,deviceId,vehcileNo,imei,tracking) {
-  
-  return { srno,date,deviceId, vehcileNo, imei, tracking };
+
+function EnhancedTableHead(props) {
+ 
+  return (
+    <TableHead className='theadbg border'>
+      <TableRow>
+        {/* <TableCell padding="checkbox"> */}
+          {/* <Checkbox
+            indeterminate={numSelected > 0 && numSelected < rowCount}
+            checked={rowCount > 0 && numSelected === rowCount}
+            onChange={onSelectAllClick}
+            inputProps={{ 'aria-label': 'select all desserts' }}
+          /> */}
+        {/* </TableCell> */}
+        {headCells.map((headCell) => (
+          <TableCell style={{color:'#6E6A76'}}
+            key={headCell.id}
+            padding={headCell.disablePadding ? 'none' : 'default'}
+          > {headCell.label}
+            
+          </TableCell>
+        ))}
+      </TableRow>
+    </TableHead>
+  );
 }
 
-const rows = [
-  createData('1','03/08/2022','India', 'IN', 1324171354, 3287263),
-  createData('2','03/08/2022','China', 'CN', 1403500365, 9596961),
-  createData('3','03/08/2022','Italy', 'IT', 60483973, 301340),
-  createData('4','03/08/2022','United States', 'US', 327167434, 9833520),
-  createData('5','03/08/2022','Canada', 'CA', 37602103, 9984670),
-  createData('6','03/08/2022','Australia', 'AU', 25475400, 7692024),
-  createData('7','03/08/2022','Germany', 'DE', 83019200, 357578),
-  createData('8','03/08/2022','Ireland', 'IE', 4857000, 70273),
-  createData('9','03/08/2022','Mexico', 'MX', 126577691, 1972550),
-  createData('10','03/08/2022','Japan', 'JP', 126317000, 377973),
-  createData('11','03/08/2022','France', 'FR', 67022000, 640679),
-  createData('12','03/08/2022','United Kingdom', 'GB', 67545757, 242495),
-  createData('13','03/08/2022','Russia', 'RU', 146793744, 17098246),
-  createData('14','03/08/2022','Nigeria', 'NG', 200962417, 923768),
-  createData('15','03/08/2022','Brazil', 'BR', 210147125, 8515767),
-];
+EnhancedTableHead.propTypes = {
+  classes: PropTypes.object.isRequired,
+  numSelected: PropTypes.number.isRequired,
+  onRequestSort: PropTypes.func.isRequired,
+  onSelectAllClick: PropTypes.func.isRequired,
+  order: PropTypes.oneOf(['asc', 'desc']).isRequired,
+  orderBy: PropTypes.string.isRequired,
+  rowCount: PropTypes.number.isRequired,
+};
+
+const useToolbarStyles = makeStyles((theme) => ({
+  root: {
+    paddingLeft: theme.spacing(2),
+    paddingRight: theme.spacing(1),
+  },
+  highlight:
+    theme.palette.type === 'light'
+      ? {
+          color: theme.palette.secondary.main,
+          backgroundColor: lighten(theme.palette.secondary.light, 0.85),
+        }
+      : {
+          color: theme.palette.text.primary,
+          backgroundColor: theme.palette.secondary.dark,
+        },
+  title: {
+    flex: '1 1 100%',
+  },
+  formControl: {
+    minWidth: 170,
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+  },
+  
+}));
 
 
-export const data = [
-  ["Task", "Hours per Day"],
-  ["Work", 11],
-  ["Eat", 2],
-  ["Commute", 2],
-  ["Watch TV", 2],
-  ["Sleep", 7],
-];
 
 
 
-function Vehiclelive() {
-  const classes = useStyles();
-  const { isopen } = useContext(SidebarContext);
+
+
+const Vehiclelive = () => {
+
+const classes = useStyles();
+const { isopen } = useContext(SidebarContext);
+
 
   const [deviceList,setDeviceList] = useState([
     {id:0,name:"Device ID"},
@@ -114,11 +141,13 @@ function Vehiclelive() {
     {id:2,name:"IMEI No"}
   ]);
 
+ 
+  
 
   const [selectType, setSelectType] = useState(" ");
   const [typeValue, setTypeValue] = useState("");
-  const [fromDate, setFromDate] = useState("");
-  const [toDate, setToDate] = useState("");
+  const [fromDate, setFromDate] = useState(new Date());
+  const [toDate, setToDate] = useState(new Date());
 
 
   
@@ -127,8 +156,7 @@ function Vehiclelive() {
     setSelectType(e.target.value);
   }
 
-  const topViewData = { 'title': 'Home ', 'subTitleFirst': '/ Vehicle-live-Status ', 'subTitleSecond': '', 'subTitleThird': '', 'buttonIcon': true, "buttonText": ' Add User', 'ButtonClick': "", 'backPath': '/dashboard', 'backPathSecond': '/maps', 'addButtonPath': '/adduser', 'addButton': false, 'addCancelClick': '', 'addClick': '', 'editButton': false, 'editButtonClick': '', 'updatePermission': [], 'updateButton': false, 'goBackEditClick': '', 'updateClick': '', 'addButtonPermission': "" }
-  
+ 
   useEffect(()=>{
     search();
   },[]);
@@ -179,18 +207,20 @@ function Vehiclelive() {
     console.log(selectType,typeValue,fromDate,toDate)
   }
 
+
+  const topViewData = { 'title': 'Home ', 'subTitleFirst': '/ Vehicle-live-Status ', 'subTitleSecond': '', 'subTitleThird': '', 'buttonIcon': true, "buttonText": ' Add User', 'ButtonClick': "", 'backPath': '/dashboard', 'backPathSecond': '/maps', 'addButtonPath': '/adduser', 'addButton': false, 'addCancelClick': '', 'addClick': '', 'editButton': false, 'editButtonClick': '', 'updatePermission': [], 'updateButton': false, 'goBackEditClick': '', 'updateClick': '', 'addButtonPermission': "" }
+  
+  
   return (
-    <div className='dashboard_home' xs={12} md={12} lg={12} style={{ marginLeft: isopen ? "201px" : "14px" }} >
+    <div className='dashboard_home' style={{ marginLeft: isopen ? "201px" : "14px" }} >
       <Container style={{ paddingRight: isopen ? '5px' : "13px" }} >
 
-
         {/* top page header  */}
-        <div style={{ marginLeft: isopen ? "24px" : "12px" }}>
-          <Pageheader data={topViewData} />
-        </div>
-
-
-        <Paper className={classes.paper} id='left' style={{ width: isopen ? '106%' : '112%', padding: '0.5rem', marginLeft: isopen ? "25px" : "10px" }}>
+            <div style={{ marginLeft: isopen ? "24px" : "12px" }}>
+              <Pageheader data={topViewData} />
+            </div>
+       
+            <Paper className={classes.paper} id='left' style={{ width: isopen ? '106%' : '112%', padding: '0.5rem', marginLeft: isopen ? "25px" : "10px" }}>
           <Grid xs={12} style={{ marginLeft: "26px" }}>
             <Typography
               style={{ padding: "6px", fontWeight: "bolder", marginTop: "6px", display: "inline-flex", }}>
@@ -287,7 +317,7 @@ function Vehiclelive() {
 
                 <TextField
                   id="outlined-basic"
-                  type="datetime-local"
+                  type="date"
                   variant="outlined"
                   size='small'
                   style={{marginLeft:"2px"}}
@@ -303,7 +333,7 @@ function Vehiclelive() {
 
                 <TextField
                   id="outlined-basic"
-                  type="datetime-local"
+                  type="date"
                   variant="outlined"
                   size='small'
                   style={{marginLeft:"2px"}}
@@ -352,11 +382,11 @@ function Vehiclelive() {
             
 
         </Paper>
+
+          
       </Container>
     </div>
-
   )
 }
-
 
 export default Vehiclelive;

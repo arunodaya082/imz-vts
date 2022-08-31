@@ -101,7 +101,7 @@ function TripDashboard() {
   const classes = useStyles();
   const { isopen } = useContext(SidebarContext);
 
-  const { data: quote, loading, error } = useFetch('https://api.quotable.io/random')
+  // const { data: quote, loading, error } = useFetch('https://api.quotable.io/random')
 
   const [searchbar, setSearchbar] = useState(true);
 

@@ -10,7 +10,6 @@ const Pageheader = ({data}) => {
             if(path =='/dashboard'){
           window.open('/routeList','_self')
           return false
-        
           }
         }
           if(path =='back'){
@@ -40,8 +39,8 @@ const Pageheader = ({data}) => {
 
 
   return (
-    <div>
-    <Grid container xs={12} >
+   <div>
+    <Grid container xs={12}>
         <AiFillHome size={15} onClick={(event)=>routePath('/')}/>
         <Typography  style={{ marginBottom: "12px", fontSize: "12px" }}>&nbsp; {data.title}
         <span onClick={(event)=>routePath(data.backPath)} className='cousor_pointer'>
@@ -50,13 +49,10 @@ const Pageheader = ({data}) => {
         <span onClick={(event)=>routePath(data.backPathSecond)} className='cousor_pointer text-capitalize'>
             {data.subTitleSecond}
         </span>
-
-
-
-
         </Typography>
     </Grid>
     </div>
+   
   )
 }
 
