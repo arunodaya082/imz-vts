@@ -10,6 +10,7 @@ import Pageheader from '../common/PageHeader/pageheader2';
 import { FiTruck } from "react-icons/fi";
 import LockTable from '../common/tablelist';
 import useFetch from '../common/custom_hooks/useFetch';
+import {MdAltRoute} from "react-icons/md";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,6 +20,12 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     marginBottom: theme.spacing(1),
 
+  },
+  paper2: {
+    padding: theme.spacing(2),
+    marginRight:"12px",
+    color: theme.palette.text.primary,
+    
   },
   table: {
     minWidth: 750,
@@ -103,6 +110,15 @@ function TripDashboard() {
 
   // const { data: quote, loading, error } = useFetch('https://api.quotable.io/random')
 
+
+  const alerts = [
+    { id: 0, label: "Total Trips Today", color: "", value: 12, background: "" },
+    { id: 1, label: "Vehicle On Trip", color: "", value: 15, background: "" },
+    { id: 2, label: "Completed Trips", color: "", value: 35, background: "" },
+    { id: 3, label: "Delayed Trips", color: "", value: 5, background: "" }
+
+  ]
+
   const [searchbar, setSearchbar] = useState(true);
 
   const [region, setRegion] = useState([
@@ -126,7 +142,9 @@ function TripDashboard() {
   const [hubValue, setHubValue] = useState("");
 
 
-  const topViewData = { 'title': 'Home ', 'subTitleFirst': '/ Dashboard ', 'subTitleSecond': '/ Gps dashboard', 'subTitleThird': '', 'buttonIcon': true, "buttonText": ' Add User', 'ButtonClick': "", 'backPath': '/dashboard', 'backPathSecond': '/maps', 'addButtonPath': '/adduser', 'addButton': false, 'addCancelClick': '', 'addClick': '', 'editButton': false, 'editButtonClick': '', 'updatePermission': [], 'updateButton': false, 'goBackEditClick': '', 'updateClick': '', 'addButtonPermission': "" }
+
+
+  const topViewData = { 'title': 'Home ', 'subTitleFirst': '/ Trip Dashboard ', 'subTitleSecond': '', 'subTitleThird': '', 'buttonIcon': true, "buttonText": ' Add User', 'ButtonClick': "", 'backPath': '/dashboard', 'backPathSecond': '/maps', 'addButtonPath': '/adduser', 'addButton': false, 'addCancelClick': '', 'addClick': '', 'editButton': false, 'editButtonClick': '', 'updatePermission': [], 'updateButton': false, 'goBackEditClick': '', 'updateClick': '', 'addButtonPermission': "" }
   return (
     <div className='dashboard_home' style={{ marginLeft: isopen ? "201px" : "14px" }} >
       <Container style={{ paddingRight: isopen ? '5px' : "13px" }} >
@@ -227,42 +245,51 @@ function TripDashboard() {
 
         <Paper className={classes.paper} id='left' style={{ width: isopen ? '106%' : '112%', padding: '0.5rem', marginLeft: isopen ? "25px" : "10px" }}>
 
-          <Grid xs={12} style={{ background: "#f4f4f4", padding: "8px", }}>
+          {/* <Grid xs={12} style={{ background: "#f4f4f4", padding: "8px", }}>
 
             <Typography style={{ fontWeight: "bold", borderRadius: "4px", color: "#00" }}>
               Trip Dashboard
             </Typography>
-          </Grid>
+          </Grid> */}
 
-          <Grid container xs={12} style={{ padding: "16px" }}>
 
-            <Grid container xs={12}>
-              <Grid xs={3}>
-                <Typography>
-                  Total Trips Today
-                </Typography>
-              </Grid>
+          {/* <Paper className={classes.paper} id='left' style={{ width: isopen ? '106%' : '112%', padding: '0.5rem', marginLeft: isopen ? "25px" : "10px" }}> */}
 
-              <Grid xs={3}>
-                <Typography>
-                  Vehicle On Trip :
-                </Typography>
-              </Grid>
+      <Grid xs={12} style={{ padding: "16px"}}>
+          <Typography style={{fontWeight:"bold",padding:"12px"}}>
+            Trips Alerts:
+          </Typography>
 
-              <Grid xs={3}>
-                <Typography>
-                  Completed Trips :
-                </Typography>
-              </Grid>
+          <Grid container xs={12} style={{display:"inline-flex",margin:"8px"}}>
+        {
+          alerts && alerts.map((alert,index) =>(
+            <Grid item xs={3} className='mt-2 mb-3'>
+            <Paper className={classes.paper2}>
+            <Grid container spacing={2}>
 
-              <Grid xs={3}>
-                <Typography>
-                  Delayed Trips :
-                </Typography>
-              </Grid>
+                      <Grid item xs={3} className='mt-1'>
+                      <MdAltRoute/>
+                      </Grid>
+
+                      <Grid item xs={9} className='font14'>
+                        <Typography style={{fontWeight:"bold"}}>
+
+                          {alert.label}
+                        </Typography>
+                        <Typography className={classes.text}>
+                         {alert.value}
+                        </Typography>
+                      </Grid>
 
             </Grid>
-          </Grid>
+            </Paper>
+            </Grid>
+          ))}
+  </Grid>
+
+  </Grid>
+  {/* </Paper> */}
+        
 
 
           {/* <Paper> */}

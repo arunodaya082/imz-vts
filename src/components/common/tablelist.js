@@ -8,6 +8,9 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 
+
+
+
 export default function LockTable({columns,rows}) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -20,6 +23,8 @@ export default function LockTable({columns,rows}) {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
+
+
 
   return (
     <Paper sx={{ width: '100%' }}>

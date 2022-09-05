@@ -16,6 +16,14 @@ import { AccountCircle } from '@material-ui/icons';
 
 
 
+const userData = [
+  { id: 0, name: "Arunodaya Singh", phone: "8009268501",email:"arunodaya.singh@imzcorporate.com", role: "Sr. senior developer"},
+  { id: 1, name: "Diwas Coudhary", phone: "8009268501",email:"diwas.choudhary@imzcorporate.com", role: "Sr. mobile developer", },
+  { id: 2, name: "Rahul Kumar", phone: "8009268501",email:"rahul.kumar@imzcorporate.com", role: "Sr. devops developer", },
+  { id: 3, name: "Vijay Kanujiya", phone: "8009268501",email:"vijay.kanujiya@imzcorporate.com", role: "Software Delivery Officer", },
+  { id: 4, name: "Manoj Tiwari", phone: "8009268501",email:"manoj.tiwari@imzcorporate.com", role: "Sr. senior developer", },
+]
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -49,7 +57,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 const headCells = [
-  { id: 'name', numeric: false, disablePadding: false, label: 'S No.' },
+  { id: 'id', numeric: false, disablePadding: false, label: 'S No.' },
   { id: 'name', numeric: false, disablePadding: false, label: 'User Details' },
   { id: 'calories', numeric: true, disablePadding: false, label: 'Phone No. / Email' },
   { id: 'fat', numeric: true, disablePadding: false, label: 'Role' },
@@ -61,7 +69,7 @@ const headCells = [
 function EnhancedTableHead(props) {
 
   return (
-    <TableHead className='theadbg border'>
+    <TableHead style={{border:"1px solid grey"}}>
       <TableRow>
         {/* <TableCell padding="checkbox"> */}
         {/* <Checkbox
@@ -224,7 +232,7 @@ const Userlist = () => {
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
-  const [userlist, setUserList] = React.useState([]);
+  const [userlist, setUserList] = React.useState(userData);
   const [pageNo, setPageNo] = React.useState(0);
   const [pageSize, setPageSize] = React.useState(10);
   const [totalPages, setTotalPages] = React.useState(1);
@@ -312,7 +320,7 @@ const Userlist = () => {
               >
                 <EnhancedTableHead />
 
-                <TableBody className='border'>
+                <TableBody style={{border:"1px solid grey"}}>
 
                   {
                     userlist && userlist.length > 0 ? userlist.map((user, index) => (<TableRow
@@ -332,24 +340,17 @@ const Userlist = () => {
 /> */}
                       </TableCell>
                       <TableCell component="th" scope="row" padding="default" style={{ position: 'relative' }}>
-                        {user.image ? <img style={{ height: '28px', width: '28px', border: '1px solid grey', position: 'absolute', fontSize: '2rem', marginTop: '2px', borderRadius: '50px' }} src={`http://staging.watsoo.com/watsoo-djb/${user.image}`} /> : <AccountCircle style={{ position: 'absolute', fontSize: '2rem', marginTop: '2px' }} />}
-
-
-                        <span style={{ color: '#1492E6', fontSize: '1.1rem', marginLeft: '2.5rem' }} onClick={(event) => usersRoute(user.id)}>
-                          {user.name} ({user.employeeCode})
+                        
+                        <span style={{ color: '#1492E6', fontSize: '1.1rem', }} onClick={(event) => usersRoute(user.id)}>
+                          {user.name} 
                         </span>
 
-                        <div className="greyfirstheading font12 subtextTable"  > {user.designation && user.designation.name}</div>
+                      
                       </TableCell>
-                      <TableCell className="greyfirstheading">{user.phoneNumber} | {user.email}</TableCell>
-                      <TableCell className="greyfirstheading">{user.site && user.site.length > 0 ? user.site.map((val) => (val.name + ', ')) : ''}</TableCell>
-
-                      {/* <TableCell  className="greyfirstheading">{user.site !==null && user.site.length>0 ? `${user.site[0].name}  (web : ${user.site[0].roles.length>0? user.site[0].roles[0].webPermissionDTOList.length +user.site[0].roles[0].webPermissionCategoryDTOList.length :''},mobile : ${user.site[0].roles.length>0? user.site[0].roles[0].mobilePermissionDTOList.length+user.site[0].roles[0].mobilePermissionCategoryDTOList.length:''})` :''}  </TableCell> */}
-                      {/* <TableCell style={{width:'12%',position:'relative'}} className='borderRight  '  >
-{user.isActive ?<span className='dot activeBg'></span> :<span className='dot inactiveBg'></span> }
-<span className={user.isActive ?'activeToggle':'inactiveToggle'}> {user.isActive ?'Active':'In Active'} </span>
-{user.isActive ?<img className="activePosition" src={activeLogo} onClick= {(event) => userActiveInactive('active',user.id)} />:<img className="inactiveposition" src={inactiveLogo} onClick= {(event) => userActiveInactive('inactive',user.id)} />}</TableCell> */}
-                    </TableRow>)) : ''
+                      <TableCell className="greyfirstheading">{user.phone} | {user.email}</TableCell>
+                      <TableCell className="greyfirstheading">{user.role}</TableCell>
+                      
+                    </TableRow>)) : 'No Data Found'
                   }
 
 

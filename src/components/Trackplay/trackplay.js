@@ -7,10 +7,12 @@ import { SidebarContext } from '../common/sidebar/sidebarContext';
 import { makeStyles } from '@material-ui/core';
 import Pageheader from '../common/PageHeader/pageheader2';
 import { MapContainer, TileLayer, Polyline } from "react-leaflet";
+import "leaflet/dist/leaflet.css";
 import AirplaneMarker from "./trackmarker.js";
 import geopoints from "./geo-location.json";
 import newGeoPoints from "./newpoints.json";
 import { Autocomplete } from '@material-ui/lab';
+import osm from './osm-provider';
 import "./style.css";
 
 
@@ -63,9 +65,11 @@ let cursor = 0;
 const TrackPlay=()=> {
   const classes = useStyles();
   const [currentTrack, setCurrentTrack] = useState({});
+  const [currentSpeed,setCurrentSpeed] = useState(10);
   const { isopen } = useContext(SidebarContext);
   
 
+  
   useEffect(() => {
     setCurrentTrack(geopoints[cursor]);
 
@@ -82,6 +86,7 @@ const TrackPlay=()=> {
     return () => {
       clearInterval(interval);
     };
+
   }, []);
   
 
@@ -130,20 +135,147 @@ const TrackPlay=()=> {
         </Grid>
 
 
+        <Grid container xs={12} direction="row" style={{ marginLeft: "8px", padding: "6px" }}>
+          
+          
+          <Grid xs={2} style={{marginLeft:"16px",marginRight:"4px",marginTop:"6px"}} >
 
-        <Grid container xs={12} style={{ width: isopen ? '106%' : '112%', padding: '0.5rem', marginLeft: isopen ? "25px" : "10px" }}>
+            {/* <FormControl >
+              <FormLabel id="demo-row-radio-buttons-group-label">Select Type</FormLabel>
+              <RadioGroup
+                row
+                aria-labelledby="demo-row-radio-buttons-group-label"
+                name="row-radio-buttons-group"
+                type="radio"
+                value={selectType}
+                onChange={handleChange}
+              >
+                <FormControlLabel value="0" defaultChecked control={<Radio />} label="Device ID" />
+                <FormControlLabel value="1" control={<Radio />} label="Vehicle No." />
+                <FormControlLabel value="2" control={<Radio />} label="IMEI No." />
+              </RadioGroup>
+            </FormControl> */}
+
+
+             <Typography style={{fontSize: "12px", fontWeight: "bold"}}>
+                          Select Type
+              </Typography> 
+                                  <Autocomplete id='header'
+                                      // getOptionLabel={(deviceList) => deviceList.name}
+
+                                      // options={deviceList || []}
+                                      // getOptionSelected={(option, value) => option.name === value.name}
+                                      // value={selectType}
+
+                                      // onChange={(event, newValue) => setSelectType(newValue)}
+                                      renderInput={(params) =>
+                                          <TextField
+                                            {...params}
+                                              variant='outlined'
+                                              margin='dense'
+                                              color="primary"
+                                              size="small"
+                                              style={{marginLeft:"2px",marginTop:"2px",background:'#fff'}}
+                                              placeholder='Select Type'
+
+                                          />
+                                      }
+                                  />
+                              
+          </Grid>
+      
+
+
+
+
+         
+        
+          {/* form filling for tracking */}
+
+            <Grid xs={2} style={{marginLeft:"16px",marginTop:"6px"}}>
+            <Typography style={{fontSize: "12px", fontWeight: "bold"}}>
+              Enter  Value
+            </Typography>  
+
+              <TextField
+                id="outlined-basic"
+                type="text"
+                placeholder="Enter Value Type"
+                variant="outlined"
+                size='small'
+                style={{marginTop:"2px",background:'#fff'}}
+                // value={typeValue}
+                // InputLabelProps={{ shrink: true }}
+                // onChange={(e) => { setTypeValue(e.target.value) }}
+              />
+                
+            </Grid>
+         
+
+            <Grid xs={2} style={{marginLeft:"16px",marginTop:"8px"}}>
+            <Typography style={{fontSize: "12px", fontWeight: "bold"}}>
+              Select From Date
+            </Typography>  
+
+              <TextField
+                id="outlined-basic"
+                type="date"
+                variant="outlined"
+                size='small'
+                style={{marginLeft:"2px"}}
+                // value={fromDate}
+                // onChange={(e) => {setFromDate(e.target.value) }}
+              />
+            </Grid>
+
+            <Grid xs={2} style={{marginLeft:"24px",marginTop:"8px"}}>
+            <Typography style={{fontSize: "12px", fontWeight: "bold"}}>
+              Select To Date
+            </Typography>  
+
+              <TextField
+                id="outlined-basic"
+                type="date"
+                variant="outlined"
+                size='small'
+                style={{marginLeft:"2px"}}
+                // value={toDate}
+                // onChange={(e) => { setToDate(e.target.value) }}
+              />
+            </Grid>
+         
+        <Grid xs={2} style={{marginLeft:"20px",marginTop:"26px"}}>
+          <Button type="button"
+            variant="contained"
+            // onClick={search}
+            // disabled={isLoading}
+            style={{paddingTop:"7px",}}
+            color="primary"
+
+            >
+            Search
+          </Button>
+        </Grid>
+
+
+        </Grid>
+
+
+
+        <Grid  container xs={12} style={{ width: isopen ? '106%' : '112%', padding: '0.5rem', marginLeft: isopen ? "25px" : "10px" }}>
         <MapContainer
-        style={{ height: "50vh", width: "100wh" }}
+        className='mapcontainer'
         center={[22.2974883, 73.2067383]}
         zoom={17}
         minZoom={5}
-        keepAtCenter={true}
+        
+        keepAtCenter={false}
       >
         <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          url={osm.maptiler.url}
+          attribution={osm.maptiler.attribution}
         />
-        <Polyline positions={newGeoPoints} color="red" />
+        <Polyline positions={newGeoPoints} color="yellow" />
         <AirplaneMarker data={currentTrack ?? {}} />
       </MapContainer>
     </Grid>

@@ -20322,3 +20322,21 @@
     [22.2925199, 73.2104066],
     [22.2925566, 73.2104166]
 ]
+
+
+
+{/*  <GoogleMapReact
+      bootstrapURLKeys={{ key: 'AIzaSyAxu4AIfJS8BOI8H3LYIOB40YWIaE3UdX0' }}
+      defaultCenter={defaultProps.center}
+      defaultZoom={defaultProps.zoom}
+      // options={getMapOptions}
+        
+    >
+      <Marker
+        lat={28.495582}
+        lng={77.079365}
+        name="My Marker"
+        color="blue"
+       
+      />
+    </GoogleMapReact> */}

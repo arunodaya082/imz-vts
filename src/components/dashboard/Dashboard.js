@@ -9,6 +9,7 @@ import { makeStyles } from '@material-ui/core';
 import Pageheader from '../common/PageHeader/pageheader2';
 import PieChart from "../common/Doughntchart2";
 import DChart from "../common/piechart";
+import {MdAltRoute} from "react-icons/md";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -17,8 +18,14 @@ const useStyles = makeStyles((theme) => ({
   },
   paper: {
     marginBottom: theme.spacing(1),
-
   },
+  paper2: {
+    padding: theme.spacing(2),
+    marginRight:"12px",
+    color: theme.palette.text.primary,
+    
+  },
+
   table: {
     minWidth: 750,
   },
@@ -97,7 +104,6 @@ function Dashboard() {
     { id: 2, label: "Completed Trips", color: "", value: 110, background: "" },
     { id: 3, label: "Delayed Trios", color: "", value: 46, background: "" },
   ]
-
 
 
   const topViewData = { 'title': 'Home ', 'subTitleFirst': '/ Dashboard ', 'subTitleSecond': '', 'subTitleThird': '', 'buttonIcon': true, "buttonText": ' Add User', 'ButtonClick': "", 'backPath': '/dashboard', 'backPathSecond': '/maps', 'addButtonPath': '/adduser', 'addButton': false, 'addCancelClick': '', 'addClick': '', 'editButton': false, 'editButtonClick': '', 'updatePermission': [], 'updateButton': false, 'goBackEditClick': '', 'updateClick': '', 'addButtonPermission': "" }
@@ -197,37 +203,43 @@ function Dashboard() {
 
 <Paper className={classes.paper} id='left' style={{ width: isopen ? '106%' : '112%', padding: '0.5rem', marginLeft: isopen ? "25px" : "10px" }}>
 
-<Typography>
+<Grid xs={12} >
+<Typography style={{fontWeight:"bold",padding:"4px"}}>
   Alerts:
 </Typography>
-<Grid container xs={12}>
 
+<Grid container xs={12} style={{display:"inline-flex",margin:"4px"}}>
+        {
+          alerts && alerts.map((alert,index) =>(
+            <Grid item xs={3} className='mt-2 mb-3'>
+            <Paper className={classes.paper2}>
+            <Grid container spacing={2}>
 
+                      <Grid item xs={3} className='mt-1'>
+                      <MdAltRoute/>
+                      </Grid>
 
-  <Grid xs={3}>
-    <Typography> 
-      Route-Deviation : 03
-    </Typography>
+                      <Grid item xs={9} className='font14'>
+                        <Typography style={{fontWeight:"bold"}}>
+
+                          {alert.label}
+                        </Typography>
+                        <Typography className={classes.text}>
+                         {alert.value}
+                        </Typography>
+                      </Grid>
+
+            </Grid>
+            </Paper>
+            </Grid>
+          ))}
   </Grid>
 
-  <Grid xs={3}>
-    <Typography>
-      Over-Speeding : 08
-    </Typography>
-  </Grid>
+        
 
-  <Grid xs={3}>
-    <Typography>
-      Unauthorised Stoppage : 13
-    </Typography>
-  </Grid>
-
-  <Grid xs={3}>
-    <Typography>
-      Tampering : 02
-    </Typography>
-  </Grid>
 </Grid>
+
+ 
 
 </Paper>
 
@@ -266,7 +278,7 @@ function Dashboard() {
 
                     <Typography style={{ fontWeight: "bold", borderRadius: "4px", color: "#00" }}>
 
-                      {head.label}
+                      {head.label} 
                     </Typography>
                   </Grid>
                 ))
@@ -314,7 +326,7 @@ function Dashboard() {
 
                     <Typography style={{ fontWeight: "bold", borderRadius: "4px", color: "#00" }}>
 
-                      {head.label}
+                      {head.label} 
                     </Typography>
                   </Grid>
                 ))

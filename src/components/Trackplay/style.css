@@ -2,4 +2,9 @@
     font-family: sans-serif;
     text-align: center;
   }
-  
+
+.mapcontainer{
+  height: 450px;
+  width: 96%;
+}
+

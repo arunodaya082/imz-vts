@@ -119,16 +119,16 @@ const dataCells = [
   { id: 8, networkProvider: 'BSNL', simNumber: "312531257323535", mobNumber: "9084674574", activationDate: "22/08/2022", expirationDate: "21/11/2022", status: "Active" },
   { id: 9, networkProvider: 'BSNL', simNumber: "312531257323535", mobNumber: "9084674574", activationDate: "22/08/2022", expirationDate: "21/11/2022", status: "Active" },
   { id: 10, networkProvider: 'Airtel', simNumber: "312531257323535", mobNumber: "9084674574", activationDate: "22/08/2022", expirationDate: "21/11/2022", status: "Active" },
-  { id: 11, networkProvider: 'Airtel', simNumber: "312531257323535", mobNumber: "9084674574", activationDate: "22/08/2022", expirationDate: "21/11/2022", status: "Active" },
-  { id: 12, networkProvider: 'Airtel', simNumber: "312531257323535", mobNumber: "9084674574", activationDate: "22/08/2022", expirationDate: "21/11/2022", status: "Active" },
-  { id: 13, networkProvider: 'Airtel', simNumber: "312531257323535", mobNumber: "9084674574", activationDate: "22/08/2022", expirationDate: "21/11/2022", status: "Active" },
-  { id: 14, networkProvider: 'Airtel', simNumber: "312531257323535", mobNumber: "9084674574", activationDate: "22/08/2022", expirationDate: "21/11/2022", status: "Active" },
-  { id: 15, networkProvider: 'Airtel', simNumber: "312531257323535", mobNumber: "9084674574", activationDate: "22/08/2022", expirationDate: "21/11/2022", status: "Active" },
-  { id: 16, networkProvider: 'Airtel', simNumber: "312531257323535", mobNumber: "9084674574", activationDate: "22/08/2022", expirationDate: "21/11/2022", status: "Active" },
-  { id: 17, networkProvider: 'Airtel', simNumber: "312531257323535", mobNumber: "9084674574", activationDate: "22/08/2022", expirationDate: "21/11/2022", status: "Active" },
-  { id: 18, networkProvider: 'Airtel', simNumber: "312531257323535", mobNumber: "9084674574", activationDate: "22/08/2022", expirationDate: "21/11/2022", status: "Active" },
-  { id: 19, networkProvider: 'Airtel', simNumber: "312531257323535", mobNumber: "9084674574", activationDate: "22/08/2022", expirationDate: "21/11/2022", status: "Active" },
-  { id: 20, networkProvider: 'Airtel', simNumber: "312531257323535", mobNumber: "9084674574", activationDate: "22/08/2022", expirationDate: "21/11/2022", status: "Active" },
+  // { id: 11, networkProvider: 'Airtel', simNumber: "312531257323535", mobNumber: "9084674574", activationDate: "22/08/2022", expirationDate: "21/11/2022", status: "Active" },
+  // { id: 12, networkProvider: 'Airtel', simNumber: "312531257323535", mobNumber: "9084674574", activationDate: "22/08/2022", expirationDate: "21/11/2022", status: "Active" },
+  // { id: 13, networkProvider: 'Airtel', simNumber: "312531257323535", mobNumber: "9084674574", activationDate: "22/08/2022", expirationDate: "21/11/2022", status: "Active" },
+  // { id: 14, networkProvider: 'Airtel', simNumber: "312531257323535", mobNumber: "9084674574", activationDate: "22/08/2022", expirationDate: "21/11/2022", status: "Active" },
+  // { id: 15, networkProvider: 'Airtel', simNumber: "312531257323535", mobNumber: "9084674574", activationDate: "22/08/2022", expirationDate: "21/11/2022", status: "Active" },
+  // { id: 16, networkProvider: 'Airtel', simNumber: "312531257323535", mobNumber: "9084674574", activationDate: "22/08/2022", expirationDate: "21/11/2022", status: "Active" },
+  // { id: 17, networkProvider: 'Airtel', simNumber: "312531257323535", mobNumber: "9084674574", activationDate: "22/08/2022", expirationDate: "21/11/2022", status: "Active" },
+  // { id: 18, networkProvider: 'Airtel', simNumber: "312531257323535", mobNumber: "9084674574", activationDate: "22/08/2022", expirationDate: "21/11/2022", status: "Active" },
+  // { id: 19, networkProvider: 'Airtel', simNumber: "312531257323535", mobNumber: "9084674574", activationDate: "22/08/2022", expirationDate: "21/11/2022", status: "Active" },
+  // { id: 20, networkProvider: 'Airtel', simNumber: "312531257323535", mobNumber: "9084674574", activationDate: "22/08/2022", expirationDate: "21/11/2022", status: "Active" },
 
 ];
 
@@ -301,7 +301,7 @@ const handleChangePage = (event, newPage) => {
             </Grid>
 
 
-            <TableContainer xs={12}>
+            <TableContainer xs={12} style={{padding:"12px"}}>
 
               <Table style={{border:"1px solid grey"}}>
 

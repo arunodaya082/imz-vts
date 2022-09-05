@@ -1,6 +1,14 @@
 import React from 'react'
 
+
+
+
+
 const AddEditSim = () => {
+
+  const 
+
+
   return (
     <div className='dashboard_home' style={{ marginLeft: isopen ? "201px" : "14px" }} >
       <Container style={{ paddingRight: isopen ? '5px' : "13px" }} >
@@ -27,7 +35,7 @@ const AddEditSim = () => {
 
             </Grid>
 
-            <Grid xs={2} style={{ marginLeft: "6rem", textAlign: "end" }}>
+            {/* <Grid xs={2} style={{ marginLeft: "6rem", textAlign: "end" }}>
 
             <Button variant="contained" color="primary" onClick={handleClickOpen}>
               + Add New 
@@ -35,7 +43,7 @@ const AddEditSim = () => {
             <SimAddUpdate open={formopen} handleClickOpen={handleClickOpen} handleClose={handleClose}/>
 
             
-            </Grid>
+            </Grid> */}
 
           </Grid>
 

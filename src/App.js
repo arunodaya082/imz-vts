@@ -8,7 +8,7 @@ import Sidebar from './components/common/sidebar/sidebar';
 import { SidebarContext } from './components/common/sidebar/sidebarContext';
 // import Map from "./components/Maps/live-track";
 // import LiveMap2 from './components/Maps/liveTrack/livetrack2';
-import Map from './components/Maps/live-track';
+
 
 
 //  lazy loading 
@@ -20,7 +20,7 @@ const Vehiclelive = lazy(()=>import ('./components/Vehicle_live_Status/vehicle_l
 const Inventory = lazy(() => import('./components/Inventory_Management/inventoryDashboard'));
 const SimInventory = lazy(() => import('./components/Inventory_Management/SimInventory/simInventory'));
 const SimpleMap = lazy(() => import('./components/Maps/map'));
-// const Reports = lazy(() => import('./components/Mis_Reports/Reports'));
+const Reports = lazy(() => import('./components/Mis_Reports/Reports'));
 // const RouteList = lazy(() => import('./components/Route_Management/routelist'));
 
 
@@ -59,13 +59,13 @@ const App = () => {
           <Route path='userlist' element={<UserList />} /> 
            <Route path='trackplay' element={<TrackPlay />} />
           <Route path='live' element={<Vehiclelive />} />
-          <Route path='livemap' element={<Map />} />
+          {/* <Route path='livemap' element={<Map />} /> */}
           <Route path='inventoryDashboard' element={<Inventory />} /> 
           <Route path='maps' element={<SimpleMap />}/>
           <Route path='siminventory' element={<SimInventory />}/> 
+          <Route path='reports' element={<Reports />}/>
           {/*
           <Route path='route' element={<RouteList />}/>
-          <Route path='reports' element={<Reports />}/>
           */}
 
         </Routes>
