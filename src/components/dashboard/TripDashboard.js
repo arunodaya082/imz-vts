@@ -116,7 +116,6 @@ function TripDashboard() {
     { id: 1, label: "Vehicle On Trip", color: "", value: 15, background: "" },
     { id: 2, label: "Completed Trips", color: "", value: 35, background: "" },
     { id: 3, label: "Delayed Trips", color: "", value: 5, background: "" }
-
   ]
 
   const [searchbar, setSearchbar] = useState(true);

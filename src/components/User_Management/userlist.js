@@ -341,7 +341,7 @@ const Userlist = () => {
                       </TableCell>
                       <TableCell component="th" scope="row" padding="default" style={{ position: 'relative' }}>
                         
-                        <span style={{ color: '#1492E6', fontSize: '1.1rem', }} onClick={(event) => usersRoute(user.id)}>
+                        <span style={{ color: '#1492E6', fontSize: '1.1rem' }} onClick={(event) => usersRoute(user.id)}>
                           {user.name} 
                         </span>
 
