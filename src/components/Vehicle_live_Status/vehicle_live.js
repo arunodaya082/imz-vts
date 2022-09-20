@@ -208,7 +208,7 @@ const { isopen } = useContext(SidebarContext);
   }
 
 
-  const topViewData = { 'title': 'Home ', 'subTitleFirst': '/ Vehicle-live-Status ', 'subTitleSecond': '', 'subTitleThird': '', 'buttonIcon': true, "buttonText": ' Add User', 'ButtonClick': "", 'backPath': '/dashboard', 'backPathSecond': '/maps', 'addButtonPath': '/adduser', 'addButton': false, 'addCancelClick': '', 'addClick': '', 'editButton': false, 'editButtonClick': '', 'updatePermission': [], 'updateButton': false, 'goBackEditClick': '', 'updateClick': '', 'addButtonPermission': "" }
+  const topViewData = { 'title': 'Home ', 'subTitleFirst': '/ Trip-Status ', 'subTitleSecond': '', 'subTitleThird': '', 'buttonIcon': false, "buttonText": ' Add User', 'ButtonClick': "", 'backPath': '/dashboard', 'backPathSecond': '/maps', 'addButtonPath': '/adduser', 'addButton': false, 'addCancelClick': '', 'addClick': '', 'editButton': false, 'editButtonClick': '', 'updatePermission': [], 'updateButton': false, 'goBackEditClick': '', 'updateClick': '', 'addButtonPermission': "" }
   
   
   return (
@@ -220,7 +220,7 @@ const { isopen } = useContext(SidebarContext);
               <Pageheader data={topViewData} />
             </div>
        
-            <Paper className={classes.paper} id='left' style={{ width: isopen ? '106%' : '112%', padding: '0.5rem', marginLeft: isopen ? "25px" : "10px" }}>
+            <Paper className={classes.paper} id='left' style={{marginTop:"8px", width: isopen ? '106%' : '112%', padding: '0.5rem', marginLeft: isopen ? "25px" : "10px" }}>
           <Grid xs={12} style={{ marginLeft: "26px" }}>
             <Typography
               style={{ padding: "6px", fontWeight: "bolder", marginTop: "6px", display: "inline-flex", }}>

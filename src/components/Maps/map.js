@@ -6,12 +6,14 @@ import { Container, Paper, Typography, Grid, TextField, Button } from '@material
 import { Autocomplete } from '@material-ui/lab';
 import { SidebarContext } from '../common/sidebar/sidebarContext';
 import { lighten,makeStyles,Toolbar,InputAdornment } from '@material-ui/core';
-import GoogleMapReact from 'google-map-react';
 import Pageheader from '../common/PageHeader/pageheader2';
 import {TableHead,TableRow,TableCell } from '@mui/material';
-import PropTypes from 'prop-types';
+import GoogleMapReact from 'google-map-react';
 import Marker from "./marker";
+import PropTypes from 'prop-types';
 import "./mapStyle.css";
+import MyMarker from './myMarker';
+
 
 
 
@@ -21,6 +23,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: '7rem'
   },
   paper: {
+    marginTop: theme.spacing(1),
     marginBottom: theme.spacing(1),
 
   },
@@ -54,6 +57,9 @@ const headCells = [
   // { id: 'carbs', numeric: true, disablePadding: false, label: 'Status' },
 
 ];
+
+
+
 
 
 function EnhancedTableHead(props) {
@@ -129,12 +135,16 @@ const Map = () => {
 
   const classes = useStyles();
   const { isopen } = useContext(SidebarContext);
+
+  
+
+
   const defaultProps = {
     center: {
-      lat: 28.495761,
-      lng: 77.079330
+      lat: 28.467300669459938,
+      lng: 76.89309357676348
     },
-    zoom: 11
+    zoom: 13
   };
 
   const [deviceList,setDeviceList] = useState([
@@ -151,7 +161,22 @@ const Map = () => {
   const [fromDate, setFromDate] = useState(new Date());
   const [toDate, setToDate] = useState(new Date());
 
+  const points = [
+    { id: 1, title: "Round Pond", lat: 28.45990603268671, lng: 76.88665627479384 },
+    { id: 2, title: "The Long Water", lat: 28.461867925519698, lng: 76.89416646042508 },
+    { id: 3, title: "The Serpentine", lat: 28.467300669459938, lng: 76.89309357676348 },
+  ];
 
+
+  const distanceToMouse = (pt, mp) => {
+    if (pt && mp) {
+      // return distance between the marker and mouse pointer
+      return Math.sqrt(
+        (pt.x - mp.x) * (pt.x - mp.x) + (pt.y - mp.y) * (pt.y - mp.y)
+      );
+    }
+  };
+  
   
 
   const handleChange = (e) => {
@@ -210,7 +235,7 @@ const Map = () => {
   }
 
 
-  const topViewData = { 'title': 'Home ', 'subTitleFirst': '/ Maps ', 'subTitleSecond': '', 'subTitleThird': '', 'buttonIcon': true, "buttonText": ' Add User', 'ButtonClick': "", 'backPath': '/dashboard', 'backPathSecond': '/maps', 'addButtonPath': '/adduser', 'addButton': false, 'addCancelClick': '', 'addClick': '', 'editButton': false, 'editButtonClick': '', 'updatePermission': [], 'updateButton': false, 'goBackEditClick': '', 'updateClick': '', 'addButtonPermission': "" }
+  const topViewData = { 'title': 'Home ', 'subTitleFirst': '/ Maps ', 'subTitleSecond': '', 'subTitleThird': '', 'buttonIcon': false, "buttonText": ' Add User', 'ButtonClick': "", 'backPath': '/dashboard', 'backPathSecond': '/maps', 'addButtonPath': '/adduser', 'addButton': false, 'addCancelClick': '', 'addClick': '', 'editButton': false, 'editButtonClick': '', 'updatePermission': [], 'updateButton': false, 'goBackEditClick': '', 'updateClick': '', 'addButtonPermission': "" }
   
   
   return (
@@ -222,7 +247,7 @@ const Map = () => {
               <Pageheader data={topViewData} />
             </div>
        
-            <Paper className={classes.paper} id='left' style={{ width: isopen ? '106%' : '112%', padding: '0.5rem', marginLeft: isopen ? "25px" : "10px" }}>
+            <Paper className={classes.paper} id='left' style={{ width: isopen ? '106%' : '112%', padding: '0.4rem', marginLeft: isopen ? "25px" : "10px" }}>
           <Grid xs={12} style={{ marginLeft: "26px" }}>
             <Typography
               style={{ padding: "6px", fontWeight: "bolder", marginTop: "6px", display: "inline-flex", }}>
@@ -240,21 +265,7 @@ const Map = () => {
           
             <Grid xs={2} style={{marginLeft:"16px",marginRight:"4px",marginTop:"6px"}} >
 
-              {/* <FormControl >
-                <FormLabel id="demo-row-radio-buttons-group-label">Select Type</FormLabel>
-                <RadioGroup
-                  row
-                  aria-labelledby="demo-row-radio-buttons-group-label"
-                  name="row-radio-buttons-group"
-                  type="radio"
-                  value={selectType}
-                  onChange={handleChange}
-                >
-                  <FormControlLabel value="0" defaultChecked control={<Radio />} label="Device ID" />
-                  <FormControlLabel value="1" control={<Radio />} label="Vehicle No." />
-                  <FormControlLabel value="2" control={<Radio />} label="IMEI No." />
-                </RadioGroup>
-              </FormControl> */}
+              
 
 
                <Typography style={{fontSize: "12px", fontWeight: "bold"}}>
@@ -277,19 +288,11 @@ const Map = () => {
                                                 size="small"
                                                 style={{marginLeft:"2px",marginTop:"2px",background:'#fff'}}
                                                 placeholder='Select Type'
-
                                             />
                                         }
-                                    />
-                                
+                                    />               
             </Grid>
         
-
-
-
-
-           
-          
             {/* form filling for tracking */}
 
               <Grid xs={2} style={{marginLeft:"16px",marginTop:"6px"}}>
@@ -307,12 +310,12 @@ const Map = () => {
                   value={typeValue}
                   // InputLabelProps={{ shrink: true }}
                   onChange={(e) => { setTypeValue(e.target.value) }}
-                />
-                  
+                />                
               </Grid>
            
 
               <Grid xs={2} style={{marginLeft:"16px",marginTop:"8px"}}>
+
               <Typography style={{fontSize: "12px", fontWeight: "bold"}}>
                 Select From Date
               </Typography>  
@@ -371,27 +374,32 @@ const Map = () => {
           <div  className="mapcontainer" >
 
 <GoogleMapReact
-      bootstrapURLKeys={{ key: 'AIzaSyAxu4AIfJS8BOI8H3LYIOB40YWIaE3UdX0' }}
+      bootstrapURLKeys={{ key: 'AIzaSyA5Lt3E5gYb-lfogvaSpCrvCpocLqHwNOI' }}
       defaultCenter={defaultProps.center}
       defaultZoom={defaultProps.zoom}
       // options={getMapOptions}
+      distanceToMouse={distanceToMouse}
         
     >
-      <Marker
+      {/* <Marker
         lat={28.495582}
         lng={77.079365}
         name="My Marker"
         color="blue"
        
-      />
+      /> */}
+
+{points.map(({ lat, lng, id, title }) => {
+          return (
+            <MyMarker key={id} lat={lat} lng={lng} text={id} tooltip={title} />
+          );
+        })}
     </GoogleMapReact>
 </div>
 
           
           </Grid>
         
-            
-
         </Paper>
 
           

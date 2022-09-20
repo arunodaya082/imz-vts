@@ -1,6 +1,5 @@
 import React from 'react';
-import { useState } from 'react';
-import { useContext } from 'react';
+import { useContext,useState } from 'react';
 import "../dashboard/dashboard.css";
 import { Container, Paper, Typography, Grid, TextField, Button } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
@@ -241,8 +240,7 @@ const Userlist = () => {
   const [searchName, setSearchName] = React.useState('');
 
 
-  //  const topViewData ={'title':'User Management','subTitleFirst':'Dashboard >','subTitleSecond':'Company >','subTitleThird':' User','buttonIcon':true,"buttonText":' Add User','ButtonClick':onAddUser,'backPath':'/dashboard','backPathSecond':'/dashboard','addButtonPath':'/adduser','addButton':false,'addCancelClick':'','addClick':'','editButton':false,'editButtonClick':'','updatePermission':[],'updateButton':false,'goBackEditClick':'','updateClick':'','addButtonPermission':addUserPermission}
-
+  
   const onAddUser = () => {
     // history.push('./adduser');
     window.open('./adduser', '_self')
@@ -268,31 +266,21 @@ const Userlist = () => {
   };
 
 
-  const topViewData = { 'title': 'Home ', 'subTitleFirst': '/ User Management ', 'subTitleSecond': '', 'subTitleThird': '', 'buttonIcon': true, "buttonText": ' Add User', 'ButtonClick': onAddUser, 'backPath': '/dashboard', 'backPathSecond': '/dashboard', 'addButtonPath': '/adduser', 'addButton': false, 'addCancelClick': '', 'addClick': '', 'editButton': false, 'editButtonClick': '', 'updatePermission': [], 'updateButton': false, 'goBackEditClick': '', 'updateClick': '', 'addButtonPermission': '' }
+  const topViewData = { 'title': 'Home ', 'subTitleFirst': '/ User Management ', 'subTitleSecond': '', 'subTitleThird': '', 'buttonIcon': true, "buttonText": 'Add User', 'ButtonClick': onAddUser, 'backPath': '/dashboard', 'backPathSecond': '/dashboard', 'addButtonPath': '/adduser', 'addButton': false, 'addCancelClick': '', 'addClick': '', 'editButton': false, 'editButtonClick': '', 'updatePermission': [], 'updateButton': false, 'goBackEditClick': '', 'updateClick': '', 'addButtonPermission': '' }
 
 
   return (
     <div className='dashboard_home' style={{ marginLeft: isopen ? "201px" : "14px" }} >
       <Container style={{ paddingRight: isopen ? '5px' : "13px" }} >
 
-        <Grid container xs={12}>
+        <Grid container xs={12} style={{marginLeft:"24px"}}>
 
-          <Grid xs={10}>
-            <div style={{ marginLeft: isopen ? "24px" : "12px" }}>
+          <Grid xs={12}>
+            <div >
               <Pageheader data={topViewData} />
             </div>
           </Grid>
-
-          <Grid xs={2}>
-            <Button
-            >
-
-            </Button>
-
-          </Grid>
-
-
-
+         
         </Grid>
         {/* top page header  */}
 

@@ -90,7 +90,7 @@ const TrackPlay=()=> {
   }, []);
   
 
-  const topViewData = { 'title': 'Home ', 'subTitleFirst': '/ Track Play ', 'subTitleSecond': '', 'subTitleThird': '', 'buttonIcon': true, "buttonText": ' Add User', 'ButtonClick': "", 'backPath': '/dashboard', 'backPathSecond': '/maps', 'addButtonPath': '/adduser', 'addButton': false, 'addCancelClick': '', 'addClick': '', 'editButton': false, 'editButtonClick': '', 'updatePermission': [], 'updateButton': false, 'goBackEditClick': '', 'updateClick': '', 'addButtonPermission': "" }
+  const topViewData = { 'title': 'Home ', 'subTitleFirst': '/ Track Play ', 'subTitleSecond': '', 'subTitleThird': '', 'buttonIcon': false, "buttonText": ' Add User', 'ButtonClick': "", 'backPath': '/dashboard', 'backPathSecond': '/maps', 'addButtonPath': '/adduser', 'addButton': false, 'addCancelClick': '', 'addClick': '', 'editButton': false, 'editButtonClick': '', 'updatePermission': [], 'updateButton': false, 'goBackEditClick': '', 'updateClick': '', 'addButtonPermission': "" }
   return (
     <div className='dashboard_home' style={{ marginLeft: isopen ? "201px" : "14px" }} >
       <Container style={{ paddingRight: isopen ? '5px' : "13px" }} >
@@ -103,16 +103,6 @@ const TrackPlay=()=> {
             </div>
         </Grid>
 
-        <Grid xs={2}>
-          <Button
-          >
-            
-          </Button>
-
-        </Grid>
-
-
-
         </Grid>
         {/* top page header  */}
 
@@ -123,7 +113,7 @@ const TrackPlay=()=> {
      
 
 
-<Paper className={classes.paper} id='left' style={{ width: isopen ? '106%' : '112%', padding: '0.5rem', marginLeft: isopen ? "25px" : "10px" }}>
+<Paper className={classes.paper} id='left' style={{marginTop:"4px", width: isopen ? '106%' : '112%', padding: '0.5rem', marginLeft: isopen ? "25px" : "10px" }}>
 
 
         <Grid xs={12} style={{ marginLeft: "26px" }}>

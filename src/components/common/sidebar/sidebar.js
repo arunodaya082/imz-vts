@@ -72,14 +72,6 @@ const Sidebar = () => {
             </div>
             <Divider />
 
-            {/* <div className='navlink' onClick={() => handleClick('livemap')}>
-              <div className='sidebar_icon' style={{ width: '20px' }}>
-                <GiGps/>
-              </div>
-              {isopen ? <div className='sidebar_title text-white ml-2 font-weight-bolder' >Live Map </div> : ""}
-            </div>
-            <Divider /> */}
-
 
             <div className='navlink ' onClick={() => handleClick('live')}>
               <div className='sidebar_icon' style={{ width: '20px' }}>
@@ -88,7 +80,25 @@ const Sidebar = () => {
                 <LocationOnIcon />
               </div>
 
+              {isopen ? <div className='sidebar_title text-white ml-2 font-weight-bolder' >Trip Status </div> : ""}
+            </div>
+            <Divider />
+
+            {/* <div className='navlink' onClick={() => handleClick('livemap')}>
+              <div className='sidebar_icon' style={{ width: '20px' }}>
+                <GiGps/>
+              </div>
               {isopen ? <div className='sidebar_title text-white ml-2 font-weight-bolder' >Live Status </div> : ""}
+            </div>
+            <Divider /> */}
+
+              <div className='navlink ' onClick={() => handleClick('live-track')}>
+              <div className='sidebar_icon' style={{ width: '20px' }}>
+
+                <MapIcon />
+              </div>
+
+              {isopen ? <div className='sidebar_title text-white ml-2 font-weight-bolder' >Track Live </div> : ""}
             </div>
             <Divider />
 
@@ -182,17 +192,9 @@ const Sidebar = () => {
 
             <Divider />
 
-            <div className='navlink ' onClick={() => handleClick('maps')}>
-              <div className='sidebar_icon' style={{ width: '20px' }}>
+          
 
-                <MapIcon />
-              </div>
-
-              {isopen ? <div className='sidebar_title text-white ml-2 font-weight-bolder' >Maps </div> : ""}
-            </div>
-            <Divider />
-
-            {/* <div className='navlink ' onClick={() => handleClick('routes')}>
+            <div className='navlink ' onClick={() => handleClick('routes')}>
               <div className='sidebar_icon' style={{ width: '20px' }}>
 
                 <FaRoute />
@@ -200,7 +202,7 @@ const Sidebar = () => {
 
               {isopen ? <div className='sidebar_title text-white ml-2 font-weight-bolder' >Route Management </div> : ""}
             </div>
-            <Divider /> */}
+            <Divider />
 
 
 

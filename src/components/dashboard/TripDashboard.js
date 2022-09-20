@@ -100,10 +100,6 @@ const rows = [
 
 
 
-export const options = {
-  title: "My Daily Activities",
-};
-
 function TripDashboard() {
   const classes = useStyles();
   const { isopen } = useContext(SidebarContext);
@@ -143,7 +139,7 @@ function TripDashboard() {
 
 
 
-  const topViewData = { 'title': 'Home ', 'subTitleFirst': '/ Trip Dashboard ', 'subTitleSecond': '', 'subTitleThird': '', 'buttonIcon': true, "buttonText": ' Add User', 'ButtonClick': "", 'backPath': '/dashboard', 'backPathSecond': '/maps', 'addButtonPath': '/adduser', 'addButton': false, 'addCancelClick': '', 'addClick': '', 'editButton': false, 'editButtonClick': '', 'updatePermission': [], 'updateButton': false, 'goBackEditClick': '', 'updateClick': '', 'addButtonPermission': "" }
+  const topViewData = { 'title': 'Home ', 'subTitleFirst': '/ Trip Dashboard ', 'subTitleSecond': '', 'subTitleThird': '', 'buttonIcon': false, "buttonText": ' Add User', 'ButtonClick': "", 'backPath': '/dashboard', 'backPathSecond': '/maps', 'addButtonPath': '/adduser', 'addButton': false, 'addCancelClick': '', 'addClick': '', 'editButton': false, 'editButtonClick': '', 'updatePermission': [], 'updateButton': false, 'goBackEditClick': '', 'updateClick': '', 'addButtonPermission': "" }
   return (
     <div className='dashboard_home' style={{ marginLeft: isopen ? "201px" : "14px" }} >
       <Container style={{ paddingRight: isopen ? '5px' : "13px" }} >
@@ -165,8 +161,6 @@ function TripDashboard() {
               <Typography style={{ marginLeft: "4px", marginTop: "22px", fontWeight: "bold", fontSize: "20px" }}>
                 <h5>
                   Dashboard
-
-                  
                 </h5>
               </Typography>
 
@@ -242,7 +236,7 @@ function TripDashboard() {
 
         {/* gps health dashboard data view */}
 
-        <Paper className={classes.paper} id='left' style={{ width: isopen ? '106%' : '112%', padding: '0.5rem', marginLeft: isopen ? "25px" : "10px" }}>
+        <Paper className={classes.paper} id='left' style={{ marginTop:"8px",width: isopen ? '106%' : '112%', padding: '0.5rem', marginLeft: isopen ? "25px" : "10px" }}>
 
           {/* <Grid xs={12} style={{ background: "#f4f4f4", padding: "8px", }}>
 
