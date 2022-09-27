@@ -367,7 +367,7 @@ export const  Dashboard= props=> {
               {/* maps */}
 
               <Grid xs={12} style={{ paddingTop: "10px", marginRight: "12px" }}>
-                <div className="mapcontainer">
+                <div className="mapcontainer" >
                   <GoogleMapReact
                     bootstrapURLKeys={{
                       key: 'AIzaSyA5Lt3E5gYb-lfogvaSpCrvCpocLqHwNOI',
@@ -421,11 +421,8 @@ export const  Dashboard= props=> {
 
                     </Grid>
                       <Divider/>
-                      </>
+                </>
 
-
-
-                    
                   ))
                 }
                 

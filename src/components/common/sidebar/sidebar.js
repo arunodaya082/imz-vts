@@ -15,6 +15,7 @@ import { FaRoute,FaSimCard,FaUserCog } from "react-icons/fa";
 import useWindowSize from '../custom_hooks/useWindow';
 import {MdOutlineInventory2,MdOutlineSimCard} from "react-icons/md";
 import {GiGps} from "react-icons/gi";
+import help1 from "../../../assests/help1.png"
 
 const Sidebar = () => {
 
@@ -250,6 +251,16 @@ const Sidebar = () => {
               <Divider />
             </div>
 
+            <Divider />
+
+            <div className='navlink ' onClick={() => handleClick('ticket')}>
+              <div className='sidebar_icon' style={{ width: '20px' }}>
+
+                <img src={help1} alt="helpdesk image" style={{height:"20px", width:"20px"}}/>
+              </div>
+
+              {isopen ? <div className='sidebar_title text-white ml-2 font-weight-bolder'>Help Desk </div> : ""}
+            </div>
             <Divider />
 
 
