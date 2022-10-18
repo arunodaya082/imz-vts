@@ -20,6 +20,9 @@ const SimInventory = lazy(() =>import("./components/Inventory_Management/SimInve
 const SimpleMap = lazy(() => import("./components/Maps/map"));
 const Reports = lazy(() => import("./components/Mis_Reports/Reports"));
 const RouteList = lazy(() => import("./components/Route_Management/routelist"));
+const TicketList =lazy(() => import("./components/helpdesk/helpdesk"));
+const AddTicket =lazy(() => import("./components/helpdesk/addEdithelpdesk"));
+const EditTicket =lazy(() => import("./components/helpdesk/addEdithelpdesk"));
 
 // main app
 
@@ -56,6 +59,10 @@ const App = () => {
                 <Route path="siminventory" element={<SimInventory />} />
                 <Route path="reports" element={<Reports />} />
                 <Route path="route" element={<RouteList />} />
+                <Route path="ticket" element={<TicketList/>}/>
+                <Route path="addTicket" element={<AddTicket/>}/>
+                <Route path="editTicket" element={<EditTicket/>}/>
+
               </Routes>
             </Suspense>
           </div>

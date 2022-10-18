@@ -55,11 +55,11 @@ const Pageheader = ({data}) => {
     </Grid>
 
 
-    <Grid container  xs={4}  >
+    <Grid container  xs={4}  style={{textAlign:"end"}}>
 
 
               {data.buttonIcon?
-            <Grid xs={12} style={{paddingLeft:"205px",marginLeft:"45px",border:"1px solid black",textAlign:"end"}}>
+            <Grid xs={12} style={{paddingLeft:"180px",marginLeft:"40px",textAlign:"end"}}>
                   <Button variant="contained"  color='primary' className="font12 fontbold"  onClick={(event)=>routePath(data.addButtonPath)}>
                   <AddIcon/>
                   {data.buttonText} 
